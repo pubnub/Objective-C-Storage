@@ -1,0 +1,32 @@
+PODS:
+  - CocoaLumberjack (2.3.0):
+    - CocoaLumberjack/Default (= 2.3.0)
+    - CocoaLumberjack/Extensions (= 2.3.0)
+  - CocoaLumberjack/Core (2.3.0)
+  - CocoaLumberjack/Default (2.3.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.3.0):
+    - CocoaLumberjack/Default
+  - PubNub (4.3.3):
+    - CocoaLumberjack (= 2.3.0)
+    - PubNub/Core (= 4.3.3)
+  - PubNub/Core (4.3.3):
+    - CocoaLumberjack (= 2.3.0)
+  - PubNubPersistence (0.1.0):
+    - PubNub
+
+DEPENDENCIES:
+  - PubNubPersistence (from `.`)
+
+EXTERNAL SOURCES:
+  PubNubPersistence:
+    :path: .
+
+SPEC CHECKSUMS:
+  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
+  PubNub: 51acd937c947d931a75d2caef654fd12f7573e09
+  PubNubPersistence: 76a6a01ea528075b09b46bcb74b177d9596d48d2
+
+PODFILE CHECKSUM: 061028ec87b358feb41db2e6327d623736670a09
+
+COCOAPODS: 1.0.1
