@@ -39,4 +39,5 @@ This is is a persistence layer for PubNub in an Objective-C environemnt for stor
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'PubNub'
+  s.dependency 'Realm'
 end

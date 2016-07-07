@@ -7,10 +7,13 @@
 //
 
 #import <PubNub/PubNub.h>
+#import "PNPConstants.h"
 #import "PNPPersistenceLayer.h"
+#import "PNPMessage.h"
 
 @interface PNPPersistenceLayer () <PNObjectEventListener>
 @property (nonatomic, strong, readwrite) PubNub *client;
+@property (nonatomic, strong) dispatch_queue_t networkQueue;
 
 @end
 
@@ -20,6 +23,7 @@
     NSParameterAssert(client);
     self = [super init];
     if (self) {
+        _networkQueue = dispatch_queue_create("com.PubNubPersistence.NetworkingQueue", DISPATCH_QUEUE_CONCURRENT);
         _client = client;
         [_client addListener:self];
     }
@@ -38,6 +42,15 @@
 
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    dispatch_async(self.networkQueue, ^{
+        @autoreleasepool {
+            RLMRealm *defaultRealm = [RLMRealm defaultRealm];
+            [defaultRealm beginWriteTransaction];
+            PNPMessage *realmMessage = [PNPMessage messageWithMessage:message];
+            [defaultRealm addOrUpdateObject:realmMessage];
+            [defaultRealm commitWriteTransaction];
+        }
+    });
 }
 
 - (void)client:(PubNub *)client didReceivePresenceEvent:(PNPresenceEventResult *)event {

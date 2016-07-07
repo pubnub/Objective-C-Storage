@@ -9,7 +9,10 @@
 #ifndef PubNubPersistence_h
 #define PubNubPersistence_h
 
+#import "PNPConstants.h"
 #import "PNPPersistenceLayer.h"
+
+#import "PNPMessage.h"
 
 
 #endif /* PubNubPersistence_h */
