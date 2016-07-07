@@ -16,7 +16,7 @@
 - (instancetype)initWithMessage:(PNMessageResult *)message {
     NSParameterAssert(message);
     NSMutableDictionary *value = [@{
-                                    @"message": message.data.message,
+                                    @"rawMessage": [[self class] dataForMessage:message.data.message],
                                     @"subscribedChannel": message.data.subscribedChannel,
                                     @"timetoken": message.data.timetoken,
                                     @"messageIdentifier": [NSUUID UUID].UUIDString,
@@ -32,11 +32,29 @@
     return [[self alloc] initWithMessage:message];
 }
 
+#pragma mark - Additional properties
+
+- (id)message {
+    return [[self class] messageForData:self.rawMessage];
+}
+
+#pragma mark - Helpers
+
++ (NSData *)dataForMessage:(id)message {
+    NSParameterAssert(message);
+    return [NSKeyedArchiver archivedDataWithRootObject:message];
+}
+
++ (id)messageForData:(NSData *)data {
+    NSParameterAssert(data);
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+}
+
 #pragma mark - Realm
 
 + (NSArray *)requiredProperties {
     return @[
-             @"message",
+             @"rawMessage",
              @"subscribedChannel",
              @"timetoken",
              @"messageIdentifier",

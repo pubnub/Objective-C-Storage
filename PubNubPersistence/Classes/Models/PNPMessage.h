@@ -14,7 +14,8 @@
 
 @interface PNPMessage : RLMObject
 
-@property NSString *message;
+@property NSData *rawMessage;
+@property (readonly) id message;
 @property NSString *subscribedChannel;
 @property NSString *actualChannel;
 @property long long timetoken;
