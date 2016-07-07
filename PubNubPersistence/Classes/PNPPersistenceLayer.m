@@ -34,6 +34,12 @@
     return [[self alloc] initWithClient:client];
 }
 
+#pragma mark - Methods
+
+- (RLMResults *)messages {
+    return [PNPMessage allObjects];
+}
+
 #pragma mark - PNObjectEventListener
 
 - (void)client:(PubNub *)client didReceiveStatus:(PNStatus *)status {

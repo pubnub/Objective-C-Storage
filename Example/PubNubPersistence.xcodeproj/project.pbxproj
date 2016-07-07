@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		491775CB27883D68D307253D /* Pods_PubNubPersistence_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4815EDD53E299791F04647E /* Pods_PubNubPersistence_Example.framework */; };
+		51285BB61D2F16A300A12879 /* PNPMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51285BB51D2F16A300A12879 /* PNPMessageTableViewCell.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -39,6 +40,8 @@
 		0927B634BB3EBCDB61D6E00A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		3E639ACEF97E2444173C5DF2 /* Pods-PubNubPersistence_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PubNubPersistence_Tests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-PubNubPersistence_Tests/Pods-PubNubPersistence_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		446FBB9E79D8F682B0360BE5 /* Pods-PubNubPersistence_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PubNubPersistence_Example.release.xcconfig"; path = "../Pods/Target Support Files/Pods-PubNubPersistence_Example/Pods-PubNubPersistence_Example.release.xcconfig"; sourceTree = "<group>"; };
+		51285BB41D2F16A300A12879 /* PNPMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPMessageTableViewCell.h; sourceTree = "<group>"; };
+		51285BB51D2F16A300A12879 /* PNPMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPMessageTableViewCell.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* PubNubPersistence_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PubNubPersistence_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -135,6 +138,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* PNPViewController.h */,
 				6003F5A6195388D20070C39A /* PNPViewController.m */,
+				51285BB41D2F16A300A12879 /* PNPMessageTableViewCell.h */,
+				51285BB51D2F16A300A12879 /* PNPMessageTableViewCell.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -392,6 +397,7 @@
 			files = (
 				6003F59E195388D20070C39A /* PNPAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* PNPViewController.m in Sources */,
+				51285BB61D2F16A300A12879 /* PNPMessageTableViewCell.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

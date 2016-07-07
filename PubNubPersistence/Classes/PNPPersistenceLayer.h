@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @class PubNub;
+@class RLMResults;
+@class PNPMessage;
 
 @interface PNPPersistenceLayer : NSObject
 
@@ -16,5 +18,7 @@
 
 - (instancetype)initWithClient:(PubNub *)client;
 + (instancetype)persistenceLayerWithClient:(PubNub *)client;
+
+@property (nonatomic, strong, readonly) RLMResults *messages;
 
 @end

@@ -8,8 +8,11 @@
 
 @import UIKit;
 
+@class PNPPersistenceLayer;
+
 @interface PNPAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong, readonly) PNPPersistenceLayer *persistenceLayer;
 
 @end
