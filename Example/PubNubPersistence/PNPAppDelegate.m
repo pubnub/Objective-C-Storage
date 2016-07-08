@@ -44,9 +44,9 @@
 //    self.persistenceLayer = [PNPPersistenceLayer persistenceLayerWithConfiguration:persistenceConfig];
     [self.client subscribeToChannels:@[@"a"] withPresence:YES];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self testRealm];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self testRealm];
+//    });
     return YES;
 }
 
