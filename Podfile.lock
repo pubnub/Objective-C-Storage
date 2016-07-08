@@ -14,7 +14,7 @@ PODS:
     - CocoaLumberjack (= 2.3.0)
   - PubNubPersistence (0.1.0):
     - PubNub
-    - Realm
+    - Realm (~> 1.0.1)
   - Realm (1.0.1):
     - Realm/Headers (= 1.0.1)
   - Realm/Headers (1.0.1)
@@ -30,7 +30,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   PubNub: 51acd937c947d931a75d2caef654fd12f7573e09
-  PubNubPersistence: 4444b7517e75bc9c7acfa5afa6e7a6003daa1a47
+  PubNubPersistence: 20e2217e53bc1433c4dac13d2f202d38fc765276
   Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
 
 PODFILE CHECKSUM: 53993e6e1e6bfc6ba6b7418dce077f4670c8c554
