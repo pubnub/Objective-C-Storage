@@ -22,7 +22,8 @@
     // Override point for customization after application launch.
     PNConfiguration *config = [PNConfiguration configurationWithPublishKey:@"demo-36" subscribeKey:@"demo-36"];
     self.client = [PubNub clientWithConfiguration:config];
-    self.persistenceLayer = [PNPPersistenceLayer persistenceLayerWithClient:self.client];
+    PNPPersistenceLayerConfiguration *persistenceConfig = [PNPPersistenceLayerConfiguration persistenceLayerConfigurationWithClient:self.client];
+    self.persistenceLayer = [PNPPersistenceLayer persistenceLayerWithConfiguration:persistenceConfig];
     [self.client subscribeToChannels:@[@"c"] withPresence:YES];
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -32,7 +33,7 @@
 }
 
 - (void)testRealm {
-    RLMResults<PNPMessage *> *messages = [PNPMessage allObjects];
+    RLMResults *messages = [PNPMessage allObjects];
     NSLog(@"messages: %@", messages);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self testRealm];

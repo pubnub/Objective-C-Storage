@@ -9,29 +9,38 @@
 #import <PubNub/PubNub.h>
 #import "PNPConstants.h"
 #import "PNPPersistenceLayer.h"
+#import "PNPPersistenceLayerConfiguration.h"
 #import "PNPMessage.h"
 
 @interface PNPPersistenceLayer () <PNObjectEventListener>
-@property (nonatomic, strong, readwrite) PubNub *client;
+@property (nonatomic, strong, readwrite) PNPPersistenceLayerConfiguration *configuration;
+
 @property (nonatomic, strong) dispatch_queue_t networkQueue;
 
 @end
 
 @implementation PNPPersistenceLayer
 
-- (instancetype)initWithClient:(PubNub *)client {
-    NSParameterAssert(client);
+- (instancetype)initWithConfiguration:(PNPPersistenceLayerConfiguration *)configuration {
+    NSParameterAssert(configuration);
     self = [super init];
     if (self) {
         _networkQueue = dispatch_queue_create("com.PubNubPersistence.NetworkingQueue", DISPATCH_QUEUE_CONCURRENT);
-        _client = client;
-        [_client addListener:self];
+        _configuration = configuration.copy;
+        // this should never be nil
+        [_configuration.client addListener:self];
     }
     return self;
 }
 
-+ (instancetype)persistenceLayerWithClient:(PubNub *)client {
-    return [[self alloc] initWithClient:client];
++ (instancetype)persistenceLayerWithConfiguration:(PNPPersistenceLayerConfiguration *)configuration {
+    return [[self alloc] initWithConfiguration:configuration];
+}
+
+#pragma mark - Getters
+
+- (PubNub *)client {
+    return self.configuration.client;
 }
 
 #pragma mark - Methods
