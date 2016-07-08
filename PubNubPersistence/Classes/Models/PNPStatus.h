@@ -7,7 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm/Realm.h>
 
-@interface PNPStatus : NSObject
+@class PNStatus;
+@class PNSubscribeStatus;
+
+@interface PNPStatus : RLMObject
+
+@property NSString *identifier;
+@property NSString *stringifiedCategory;
+@property long long currentTimetoken;
+@property long long lastTimetoken;
+@property NSInteger statusCode;
+
+- (instancetype)initWithStatus:(PNSubscribeStatus *)status;
++ (instancetype)statusWithStatus:(PNSubscribeStatus *)status;
 
 @end

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="whP-gf-Uak">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7J4-r1-dcH">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Messages-->
         <scene sceneID="wQg-tq-qST">
             <objects>
-                <viewController id="whP-gf-Uak" customClass="PNPViewController" sceneMemberID="viewController">
+                <viewController id="whP-gf-Uak" customClass="PNPMessageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uEw-UM-LJ8"/>
                         <viewControllerLayoutGuide type="bottom" id="Mvr-aV-6Um"/>
@@ -18,10 +18,68 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Messages" id="Rxs-0c-f9V"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="433"/>
+            <point key="canvasLocation" x="1217" y="1319"/>
+        </scene>
+        <!--Statuses-->
+        <scene sceneID="rDW-Wa-RKL">
+            <objects>
+                <viewController id="d1m-qN-OWe" userLabel="Statuses" customClass="PNPStatusViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Olp-2a-f3M"/>
+                        <viewControllerLayoutGuide type="bottom" id="aWJ-cN-gLp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="389-hU-VkS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Statuses" id="7xw-6O-0KX"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9UY-fe-QiY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1185" y="594"/>
+        </scene>
+        <!--Presence-->
+        <scene sceneID="LSX-r3-gTq">
+            <objects>
+                <viewController id="oPZ-ez-tUD" userLabel="Presence" customClass="PNPPresenceEventsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l5N-Vk-8gf"/>
+                        <viewControllerLayoutGuide type="bottom" id="6eJ-6M-L3Y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cfZ-IJ-KlE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Presence" id="3So-OG-6sD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oEG-xR-l11" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1217" y="2064"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="sZJ-aW-tEK">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="7J4-r1-dcH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="V7u-qd-b8Y">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="d1m-qN-OWe" kind="relationship" relationship="viewControllers" id="HGN-Lr-pC7"/>
+                        <segue destination="whP-gf-Uak" kind="relationship" relationship="viewControllers" id="QoL-Eu-kil"/>
+                        <segue destination="oPZ-ez-tUD" kind="relationship" relationship="viewControllers" id="8cZ-en-prB"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="22m-cm-ePH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="133" y="1095"/>
         </scene>
     </scenes>
 </document>

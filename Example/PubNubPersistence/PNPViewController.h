@@ -8,6 +8,14 @@
 
 @import UIKit;
 
+@class RLMResults;
+@class PNPPersistenceLayer;
+
 @interface PNPViewController : UIViewController
+
+@property (nonatomic, strong, readonly) PNPPersistenceLayer *persistenceLayer;
+
+- (RLMResults *)dataSourceResults;
+- (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath;
 
 @end

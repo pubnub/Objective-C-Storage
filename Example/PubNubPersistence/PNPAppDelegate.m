@@ -11,30 +11,52 @@
 #import "PNPAppDelegate.h"
 
 @interface PNPAppDelegate ()
-@property (nonatomic, strong, readwrite) PNPPersistenceLayer *persistenceLayer;
-@property (nonatomic, strong) PubNub *client;
+//@property (nonatomic, strong, readwrite) PNPPersistenceLayer *persistenceLayer;
+@property (nonatomic, strong, readonly) PubNub *client;
 
 @end
 
 @implementation PNPAppDelegate
+@synthesize client = _client;
+@synthesize persistenceLayer = _persistenceLayer;
+
+- (PubNub *)client {
+    if (!_client) {
+        PNConfiguration *config = [PNConfiguration configurationWithPublishKey:@"demo-36" subscribeKey:@"demo-36"];
+        _client = [PubNub clientWithConfiguration:config];
+    }
+    return _client;
+}
+
+- (PNPPersistenceLayer *)persistenceLayer {
+    if (!_persistenceLayer) {
+        PNPPersistenceLayerConfiguration *persistenceConfig = [PNPPersistenceLayerConfiguration persistenceLayerConfigurationWithClient:self.client];
+        _persistenceLayer = [PNPPersistenceLayer persistenceLayerWithConfiguration:persistenceConfig];
+    }
+    return _persistenceLayer;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    PNConfiguration *config = [PNConfiguration configurationWithPublishKey:@"demo-36" subscribeKey:@"demo-36"];
-    self.client = [PubNub clientWithConfiguration:config];
-    PNPPersistenceLayerConfiguration *persistenceConfig = [PNPPersistenceLayerConfiguration persistenceLayerConfigurationWithClient:self.client];
-    self.persistenceLayer = [PNPPersistenceLayer persistenceLayerWithConfiguration:persistenceConfig];
-    [self.client subscribeToChannels:@[@"c"] withPresence:YES];
+//    PNConfiguration *config = [PNConfiguration configurationWithPublishKey:@"demo-36" subscribeKey:@"demo-36"];
+//    self.client = [PubNub clientWithConfiguration:config];
+//    PNPPersistenceLayerConfiguration *persistenceConfig = [PNPPersistenceLayerConfiguration persistenceLayerConfigurationWithClient:self.client];
+//    self.persistenceLayer = [PNPPersistenceLayer persistenceLayerWithConfiguration:persistenceConfig];
+    [self.client subscribeToChannels:@[@"a"] withPresence:YES];
     
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self testRealm];
-//    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self testRealm];
+    });
     return YES;
 }
 
 - (void)testRealm {
     RLMResults *messages = [PNPMessage allObjects];
     NSLog(@"messages: %@", messages);
+    RLMResults *statuses = [PNPStatus allObjects];
+    NSLog(@"statuses: %@", statuses);
+    RLMResults *presenceEvents = [PNPPresenceEvent allObjects];
+    NSLog(@"presenceEvents: %@", presenceEvents);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self testRealm];
     });

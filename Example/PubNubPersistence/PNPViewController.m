@@ -16,18 +16,34 @@
                                     UITableViewDataSource
                                 >
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) PNPPersistenceLayer *persistenceLayer;
-@property (nonatomic, strong) RLMNotificationToken *messageNotificationToken;
+@property (nonatomic, strong, readwrite) PNPPersistenceLayer *persistenceLayer;
+@property (nonatomic, strong) RLMNotificationToken *updateNotificationToken;
 
 @end
 
 @implementation PNPViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
+        _persistenceLayer = appDelegate.persistenceLayer;
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
+        _persistenceLayer = appDelegate.persistenceLayer;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
-    self.persistenceLayer = appDelegate.persistenceLayer;
     self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     [self.tableView registerClass:[PNPMessageTableViewCell class] forCellReuseIdentifier:[PNPMessageTableViewCell reuseIdentifier]];
     self.tableView.delegate = self;
@@ -35,7 +51,7 @@
     [self.view addSubview:self.tableView];
     
     PNPWeakify(self);
-    self.messageNotificationToken = [self.persistenceLayer.messages addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
+    self.updateNotificationToken = [self.dataSourceResults addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Failed to open realm on background worker: %@", error);
             return;
@@ -63,6 +79,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    [self.updateNotificationToken stop];
+}
+
+- (RLMResults *)dataSourceResults {
+    return nil;
+}
+
 #pragma mark - UITableViewDelegate
 
 #pragma mark - UITableViewDataSource
@@ -72,17 +96,22 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.persistenceLayer.messages.count;
+    return self.dataSourceResults.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PNPMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PNPMessageTableViewCell reuseIdentifier] forIndexPath:indexPath];
+    [self configureCell:(UITableViewCell *)cell forIndexPath:indexPath];
     
-    PNPMessage *message = [self.persistenceLayer.messages objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", message.message];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(message.timetoken)];
+//    PNPMessage *message = [self.persistenceLayer.messages objectAtIndex:indexPath.row];
+//    
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@", message.message];
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(message.timetoken)];
     return cell;
+}
+
+- (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
+    
 }
 
 @end

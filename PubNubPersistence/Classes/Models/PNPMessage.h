@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <Realm/Realm.h>
-//#import "RLMObject.h"
 
 @class PNMessageResult;
 
@@ -19,7 +18,7 @@
 @property NSString *subscribedChannel;
 @property NSString *actualChannel;
 @property long long timetoken;
-@property NSString *messageIdentifier;
+@property NSString *identifier;
 
 - (instancetype)initWithMessage:(PNMessageResult *)message;
 + (instancetype)messageWithMessage:(PNMessageResult *)message;

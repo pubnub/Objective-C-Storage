@@ -19,7 +19,7 @@
                                     @"rawMessage": [[self class] dataForMessage:message.data.message],
                                     @"subscribedChannel": message.data.subscribedChannel,
                                     @"timetoken": message.data.timetoken,
-                                    @"messageIdentifier": [NSUUID UUID].UUIDString,
+                                    @"identifier": [NSUUID UUID].UUIDString,
                                     } mutableCopy];
     if (message.data.actualChannel) {
         value[@"actualChannel"] = message.data.actualChannel;
@@ -57,12 +57,12 @@
              @"rawMessage",
              @"subscribedChannel",
              @"timetoken",
-             @"messageIdentifier",
+             @"identifier",
              ];
 }
 
 + (NSString *)primaryKey {
-    return @"messageIdentifier";
+    return @"identifier";
 }
 
 @end
