@@ -119,7 +119,7 @@
             {
                 RLMRealm *defaultRealm = [RLMRealm defaultRealm];
                 [defaultRealm beginWriteTransaction];
-                PNPStatus *realmStatus = [PNPStatus statusWithStatus:status];
+                PNPStatus *realmStatus = [PNPStatus statusWithStatus:subscribeStatus];
                 [defaultRealm addOrUpdateObject:realmStatus];
                 [defaultRealm commitWriteTransaction];
             }
