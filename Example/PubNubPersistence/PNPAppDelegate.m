@@ -12,7 +12,7 @@
 
 @interface PNPAppDelegate ()
 //@property (nonatomic, strong, readwrite) PNPPersistenceLayer *persistenceLayer;
-@property (nonatomic, strong, readonly) PubNub *client;
+@property (nonatomic, strong, readwrite) PubNub *client;
 
 @end
 

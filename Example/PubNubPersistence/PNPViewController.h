@@ -7,11 +7,12 @@
 //
 
 @import UIKit;
+#import "PNPPubNubViewController.h"
 
 @class RLMResults;
 @class PNPPersistenceLayer;
 
-@interface PNPViewController : UIViewController
+@interface PNPViewController : PNPPubNubViewController
 
 @property (nonatomic, strong, readonly) PNPPersistenceLayer *persistenceLayer;
 

@@ -23,15 +23,6 @@
 
 @implementation PNPViewController
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
-        _persistenceLayer = appDelegate.persistenceLayer;
-    }
-    return self;
-}
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
