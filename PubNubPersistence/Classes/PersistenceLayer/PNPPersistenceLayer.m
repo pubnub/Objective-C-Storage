@@ -102,7 +102,6 @@
 #pragma mark - PNObjectEventListener
 
 - (void)client:(PubNub *)client didReceiveStatus:(PNStatus *)status {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     // handle heartbeat at some point!
     PNSubscribeStatus *subscribeStatus = (PNSubscribeStatus *)status;
     PNPWeakify(self);
@@ -131,20 +130,16 @@
 }
 
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     dispatch_async(self.networkQueue, ^{
-        @autoreleasepool {
-            RLMRealm *defaultRealm = [RLMRealm defaultRealm];
-            [defaultRealm beginWriteTransaction];
-            PNPMessage *realmMessage = [PNPMessage messageWithMessage:message];
-            [defaultRealm addOrUpdateObject:realmMessage];
-            [defaultRealm commitWriteTransaction];
-        }
+        RLMRealm *defaultRealm = [RLMRealm defaultRealm];
+        [defaultRealm beginWriteTransaction];
+        PNPMessage *realmMessage = [PNPMessage messageWithMessage:message];
+        [defaultRealm addOrUpdateObject:realmMessage];
+        [defaultRealm commitWriteTransaction];
     });
 }
 
 - (void)client:(PubNub *)client didReceivePresenceEvent:(PNPresenceEventResult *)event {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     PNPWeakify(self);
     dispatch_async(self.networkQueue, ^{
         PNPStrongify(self);

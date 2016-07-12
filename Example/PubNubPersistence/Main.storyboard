@@ -62,6 +62,34 @@
             </objects>
             <point key="canvasLocation" x="1217" y="2064"/>
         </scene>
+        <!--Debug-->
+        <scene sceneID="UNr-Hv-cNQ">
+            <objects>
+                <viewController id="MVN-u9-8BT" customClass="PNPDebugViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TR6-v8-Mtg"/>
+                        <viewControllerLayoutGuide type="bottom" id="FvL-a1-aPX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YJR-KB-JPQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r6o-Fq-7QE">
+                                <rect key="frame" x="115" y="93" width="100" height="30"/>
+                                <state key="normal" title="Subscribe"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Debug" id="vT8-48-FQT"/>
+                    <connections>
+                        <outlet property="subscriptionButton" destination="r6o-Fq-7QE" id="zcE-sB-pCN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eUA-TC-uVy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1209" y="2745"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="sZJ-aW-tEK">
             <objects>
@@ -75,6 +103,7 @@
                         <segue destination="d1m-qN-OWe" kind="relationship" relationship="viewControllers" id="HGN-Lr-pC7"/>
                         <segue destination="whP-gf-Uak" kind="relationship" relationship="viewControllers" id="QoL-Eu-kil"/>
                         <segue destination="oPZ-ez-tUD" kind="relationship" relationship="viewControllers" id="8cZ-en-prB"/>
+                        <segue destination="MVN-u9-8BT" kind="relationship" relationship="viewControllers" id="y0y-ZW-1cr"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22m-cm-ePH" userLabel="First Responder" sceneMemberID="firstResponder"/>

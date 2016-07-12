@@ -1,0 +1,702 @@
+2016-07-12 00:55:36.778 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController _updateSubscriptionButton]: we are subscribing
+2016-07-12 00:55:41.175 PubNubPersistence_Example[51124:4622917] selected
+2016-07-12 00:55:41.528 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController _updateSubscriptionButton]: we are not subscribing
+2016-07-12 00:55:41.528 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveStatus:]: {
+    Category = "Expected Disconnect";
+    Error = NO;
+    Operation = Unsubscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = null;
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" = "no data";
+        "Status code" = 200;
+    };
+}
+2016-07-12 00:55:46.006 PubNubPersistence_Example[51124:4622917] unselected
+2016-07-12 00:55:46.030 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController _updateSubscriptionButton]: we are subscribing
+2016-07-12 00:55:46.030 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveStatus:]: {
+    Category = Connected;
+    Error = NO;
+    Objects =     {
+        Channels =         (
+            a,
+            "a-pnpres"
+        );
+    };
+    Operation = Subscribe;
+    Region =     {
+        Current = 1;
+        Previous = "-1";
+    };
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&pnsdk=PubNub-ObjC-iOS%2F4.4.1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&tt=0";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            region = 1;
+            timetoken = 14683101433892814;
+        };
+        "Status code" = 200;
+    };
+    Time =     {
+        Current = 14683101433892814;
+        Previous = 0;
+    };
+}
+2016-07-12 00:55:46.533 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceivePresenceEvent:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683101433892814&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            presence =             {
+                occupancy = 2;
+                timetoken = 1468310146;
+                uuid = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+            };
+            presenceEvent = join;
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683101465887290;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 00:55:49.092 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683101465891529&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = "*.............. 771 - 2016-07-12 00:55:48";
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683101488791248;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 00:56:43.424 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683101488797188&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = 123;
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683102034429156;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 00:56:53.297 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683102034432429&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = "**............. 772 - 2016-07-12 00:56:52";
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683102131796236;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 00:57:43.398 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683102131799978&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = 123;
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683102634462055;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 00:57:57.461 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683102634474559&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = "***............ 773 - 2016-07-12 00:57:57";
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683102774885049;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 00:58:43.206 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683102774885509&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = 123;
+            region = 3;
+            subscribedChannel = a;
+            timetoken = 14683103231701771;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 00:59:01.839 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683103232492037&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = "****........... 774 - 2016-07-12 00:59:01";
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683103418272291;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 00:59:20.944 PubNubPersistence_Example[51124:4622917] selected
+2016-07-12 00:59:21.229 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController _updateSubscriptionButton]: we are not subscribing
+2016-07-12 00:59:21.230 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveStatus:]: {
+    Category = "Expected Disconnect";
+    Error = NO;
+    Operation = Unsubscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = null;
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" = "no data";
+        "Status code" = 200;
+    };
+}
+2016-07-12 00:59:22.604 PubNubPersistence_Example[51124:4622917] unselected
+2016-07-12 00:59:22.627 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController _updateSubscriptionButton]: we are subscribing
+2016-07-12 00:59:22.628 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveStatus:]: {
+    Category = Connected;
+    Error = NO;
+    Objects =     {
+        Channels =         (
+            a,
+            "a-pnpres"
+        );
+    };
+    Operation = Subscribe;
+    Region =     {
+        Current = 1;
+        Previous = "-1";
+    };
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&pnsdk=PubNub-ObjC-iOS%2F4.4.1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&tt=0";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            region = 1;
+            timetoken = 14683103612062618;
+        };
+        "Status code" = 200;
+    };
+    Time =     {
+        Current = 14683103612062618;
+        Previous = 0;
+    };
+}
+2016-07-12 00:59:22.883 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceivePresenceEvent:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683103612062618&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            presence =             {
+                occupancy = 2;
+                timetoken = 1468310362;
+                uuid = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+            };
+            presenceEvent = join;
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683103629082344;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 00:59:43.112 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683103629085134&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = 123;
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683103831635624;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 01:00:06.228 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683103831636652&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = "*****.......... 775 - 2016-07-12 01:00:05";
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683104061429110;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 01:00:43.382 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683104061433236&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = 123;
+            region = 12;
+            subscribedChannel = a;
+            timetoken = 14683104433509615;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 01:01:10.395 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683104434349633&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = "******......... 776 - 2016-07-12 01:01:10";
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683104704455009;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 01:01:43.421 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683104704458983&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = 123;
+            region = 12;
+            subscribedChannel = a;
+            timetoken = 14683105033521650;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 01:02:14.727 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683105034357932&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = "*******........ 777 - 2016-07-12 01:02:14";
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683105347761017;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 01:02:43.208 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683105347765382&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = 123;
+            region = 12;
+            subscribedChannel = a;
+            timetoken = 14683105631124743;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 01:03:19.152 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683105631960382&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = "********....... 778 - 2016-07-12 01:03:18";
+            region = 1;
+            subscribedChannel = a;
+            timetoken = 14683105991123821;
+        };
+        "Status code" = 200;
+    };
+}
+2016-07-12 01:03:43.421 PubNubPersistence_Example[51124:4622917] -[PNPDebugViewController client:didReceiveMessage:]: {
+    Operation = Subscribe;
+    Request =     {
+        Authorization = "not set";
+        Method = GET;
+        Origin = "pubsub.pubnub.com";
+        "POST Body size" = 0;
+        Secure = YES;
+        URL = "https://pubsub.pubnub.com/v2/subscribe/demo-36/a,a-pnpres/0?uuid=662DF68B-E8C8-4929-8EDF-EE274BE0A561&tt=14683105991128242&tr=1&deviceid=38139FB6-CAFD-4BB4-A3A6-F3DABA4280A1&pnsdk=PubNub-ObjC-iOS%2F4.4.1";
+        UUID = "662DF68B-E8C8-4929-8EDF-EE274BE0A561";
+    };
+    Response =     {
+        "Processed data" =         {
+            envelope =             {
+                "Client Identifier" = "<null>";
+                "Eat after reading" = "<null>";
+                Flags = 512;
+                Metadata = "<null>";
+                "Replication map" = "<null>";
+                "Sequence number" = "<null>";
+                "Shard identifier" = 4;
+                "Subscribe key" = "demo-36";
+                Waypoints = "<null>";
+            };
+            message = 123;
+            region = 3;
+            subscribedChannel = a;
+            timetoken = 14683106232301724;
+        };
+        "Status code" = 200;
+    };
+}
+
