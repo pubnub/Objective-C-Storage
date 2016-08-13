@@ -26,11 +26,11 @@
 }
 
 - (RLMResults *)dataSourceResults {
-    return self.persistenceLayer.messages;
+    return self.persistence.messages;
 }
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
-    PNPMessage *message = [self.persistenceLayer.messages objectAtIndex:indexPath.row];
+    PNPMessage *message = [self.persistence.messages objectAtIndex:indexPath.row];
 
     cell.textLabel.text = [NSString stringWithFormat:@"%@", message.message];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(message.timetoken)];

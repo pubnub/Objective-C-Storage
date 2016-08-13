@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Jordan Zucker. All rights reserved.
 //
 
-#import <PubNubPersistence/PubNubPersistence.h>
+#import <PubNubPersistence/Persistence.h>
 #import "PNPAppDelegate.h"
 #import "PNPViewController.h"
 #import "PNPMessageTableViewCell.h"
@@ -16,7 +16,7 @@
                                     UITableViewDataSource
                                 >
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong, readwrite) PNPPersistenceLayer *persistenceLayer;
+@property (nonatomic, strong, readwrite) PubNubPersistence *persistence;
 @property (nonatomic, strong) RLMNotificationToken *updateNotificationToken;
 
 @end
@@ -27,7 +27,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
-        _persistenceLayer = appDelegate.persistenceLayer;
+        _persistence = appDelegate.persistence;
     }
     return self;
 }

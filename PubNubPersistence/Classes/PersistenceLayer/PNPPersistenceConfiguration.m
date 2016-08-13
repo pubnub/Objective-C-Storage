@@ -1,15 +1,15 @@
 //
-//  PNPPersistenceLayerConfiguration.m
+//  PNPPersistenceConfiguration.m
 //  Pods
 //
-//  Created by Jordan Zucker on 7/8/16.
+//  Created by Jordan Zucker on 8/12/16.
 //
 //
 
 #import <PubNub/PubNub.h>
-#import "PNPPersistenceLayerConfiguration.h"
+#import "PNPPersistenceConfiguration.h"
 
-@implementation PNPPersistenceLayerConfiguration
+@implementation PNPPersistenceConfiguration
 
 - (instancetype)initWithClient:(PubNub *)client {
     NSParameterAssert(client);
@@ -22,14 +22,14 @@
     return self;
 }
 
-+ (instancetype)persistenceLayerConfigurationWithClient:(PubNub *)client {
++ (instancetype)persistenceConfigurationWithClient:(PubNub *)client {
     return [[self alloc] initWithClient:client];
 }
 
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone {
-    PNPPersistenceLayerConfiguration *configuration = [[[self class] allocWithZone:zone] initWithClient:self.client];
+    PNPPersistenceConfiguration *configuration = [[[self class] allocWithZone:zone] initWithClient:self.client];
     configuration.statusStorageOption = self.statusStorageOption;
     configuration.presenceEventsStorageOption = self.presenceEventsStorageOption;
     return configuration;

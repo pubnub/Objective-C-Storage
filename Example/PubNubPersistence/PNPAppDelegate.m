@@ -7,7 +7,7 @@
 //
 
 #import <PubNub/PubNub.h>
-#import <PubNubPersistence/PubNubPersistence.h>
+#import <PubNubPersistence/Persistence.h>
 #import "PNPAppDelegate.h"
 
 @interface PNPAppDelegate ()
@@ -18,7 +18,7 @@
 
 @implementation PNPAppDelegate
 @synthesize client = _client;
-@synthesize persistenceLayer = _persistenceLayer;
+@synthesize persistence = _persistence;
 
 - (PubNub *)client {
     if (!_client) {
@@ -28,12 +28,12 @@
     return _client;
 }
 
-- (PNPPersistenceLayer *)persistenceLayer {
-    if (!_persistenceLayer) {
-        PNPPersistenceLayerConfiguration *persistenceConfig = [PNPPersistenceLayerConfiguration persistenceLayerConfigurationWithClient:self.client];
-        _persistenceLayer = [PNPPersistenceLayer persistenceLayerWithConfiguration:persistenceConfig];
+- (PubNubPersistence *)persistence {
+    if (!_persistence) {
+        PNPPersistenceConfiguration *persistenceConfig = [PNPPersistenceConfiguration persistenceConfigurationWithClient:self.client];
+        _persistence = [PubNubPersistence persistenceWithConfiguration:persistenceConfig];
     }
-    return _persistenceLayer;
+    return _persistence;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

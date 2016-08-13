@@ -1,31 +1,31 @@
 //
-//  PNPPersistenceLayer.m
+//  PubNubPersistence.m
 //  Pods
 //
-//  Created by Jordan Zucker on 7/7/16.
+//  Created by Jordan Zucker on 8/12/16.
 //
 //
 
 #import <PubNub/PubNub.h>
-#import "PNPPersistenceLayer.h"
-#import "PNPPersistenceLayerConfiguration.h"
+#import "PNPPersistenceConfiguration.h"
+#import "PubNubPersistence.h"
 #import "PNPMessage.h"
 #import "PNPPresenceEvent.h"
 #import "PNPStatus.h"
 
-@interface PNPPersistenceLayer () <PNObjectEventListener>
-@property (nonatomic, strong, readwrite) PNPPersistenceLayerConfiguration *configuration;
+@interface PubNubPersistence () <PNObjectEventListener>
+@property (nonatomic, strong, readwrite) PNPPersistenceConfiguration *configuration;
 
 @property (nonatomic, strong) dispatch_queue_t networkQueue;
 
 @end
 
-@implementation PNPPersistenceLayer
+@implementation PubNubPersistence
 
 @synthesize statusStorageOption = _statusStorageOption;
 @synthesize presenceEventsStorageOption = _presenceEventsStorageOption;
 
-- (instancetype)initWithConfiguration:(PNPPersistenceLayerConfiguration *)configuration {
+- (instancetype)initWithConfiguration:(PNPPersistenceConfiguration *)configuration {
     NSParameterAssert(configuration);
     self = [super init];
     if (self) {
@@ -39,7 +39,7 @@
     return self;
 }
 
-+ (instancetype)persistenceLayerWithConfiguration:(PNPPersistenceLayerConfiguration *)configuration {
++ (instancetype)persistenceWithConfiguration:(PNPPersistenceConfiguration *)configuration {
     return [[self alloc] initWithConfiguration:configuration];
 }
 
@@ -113,7 +113,7 @@
             {
                 
             }
-//                break; // uncomment this at some point
+                //                break; // uncomment this at some point
             case PNPStatusStorageOptionsAll:
             {
                 RLMRealm *defaultRealm = [RLMRealm defaultRealm];

@@ -9,22 +9,31 @@
 #import <PubNub/PubNub.h>
 #import "PNPStatus.h"
 
+//@property long long currentTimetoken;
+//@property long long lastTimetoken;
+//@property NSInteger category;
+//@property BOOL error;
+
 @implementation PNPStatus
 
-- (instancetype)initWithStatus:(PNSubscribeStatus *)status {
+- (instancetype)initWithStatus:(PNStatus *)status {
     NSParameterAssert(status);
-    NSMutableDictionary *value = [@{
-                                    @"identifier": [NSUUID UUID].UUIDString,
-                                    @"stringifiedCategory": status.stringifiedCategory,
-                                    @"currentTimetoken": status.currentTimetoken,
-                                    @"lastTimetoken": status.lastTimeToken,
-                                    @"statusCode": @(status.statusCode),
-                                    } mutableCopy];
-    self = [self initWithValue:value.copy];
+//    NSMutableDictionary *value = [@{
+//                                    @"currentTimetoken": status.currentTimetoken,
+//                                    @"lastTimetoken": status.lastTimeToken,
+//                                    @"statusCode": @(status.statusCode),
+//                                    } mutableCopy];
+//    self = [self initWithValue:value.copy];
+//    return self;
+    self = [self initWithResult:status];
+    if (self) {
+        _category = (NSInteger)status.category;
+        _error = status.isError;
+    }
     return self;
 }
 
-+ (instancetype)statusWithStatus:(PNSubscribeStatus *)status {
++ (instancetype)statusWithStatus:(PNStatus *)status {
     return [[self alloc] initWithStatus:status];
 }
 
@@ -32,16 +41,13 @@
 
 + (NSArray *)requiredProperties {
     return @[
-             @"identifier",
-             @"stringifiedCategory",
-             @"currentTimetoken",
-             @"lastTimetoken",
-             @"statusCode",
+             @"category",
+             @"error",
              ];
 }
 
 + (NSString *)primaryKey {
-    return @"identifier";
+    return [super primaryKey];
 }
 
 @end

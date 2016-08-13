@@ -1,8 +1,8 @@
 //
-//  PNPPersistenceLayerConfiguration.h
+//  PNPPersistenceConfiguration.h
 //  Pods
 //
-//  Created by Jordan Zucker on 7/8/16.
+//  Created by Jordan Zucker on 8/12/16.
 //
 //
 
@@ -11,10 +11,10 @@
 
 @class PubNub;
 
-@interface PNPPersistenceLayerConfiguration : NSObject <NSCopying>
+@interface PNPPersistenceConfiguration : NSObject <NSCopying>
 
 - (instancetype)initWithClient:(PubNub *)client;
-+ (instancetype)persistenceLayerConfigurationWithClient:(PubNub *)client;
++ (instancetype)persistenceConfigurationWithClient:(PubNub *)client;
 
 @property (nonatomic, strong) PubNub *client;
 @property (nonatomic, assign) PNPStatusStorageOptions statusStorageOption;

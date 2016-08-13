@@ -1,27 +1,28 @@
 //
-//  PNPPersistenceLayer.h
+//  PubNubPersistence.h
 //  Pods
 //
-//  Created by Jordan Zucker on 7/7/16.
+//  Created by Jordan Zucker on 8/12/16.
 //
 //
 
 #import <Foundation/Foundation.h>
+
 #import "PNPConstants.h"
 
 @class PubNub;
-@class PNPPersistenceLayerConfiguration;
+@class PNPPersistenceConfiguration;
 @class RLMResults;
 @class PNPMessage;
 @class PNPStatus;
 
-@interface PNPPersistenceLayer : NSObject
+@interface PubNubPersistence : NSObject
 
 @property (nonatomic, strong, readonly) PubNub *client;
-@property (nonatomic, strong, readonly) PNPPersistenceLayerConfiguration *configuration;
+@property (nonatomic, strong, readonly) PNPPersistenceConfiguration *configuration;
 
-- (instancetype)initWithConfiguration:(PNPPersistenceLayerConfiguration *)configuration;
-+ (instancetype)persistenceLayerWithConfiguration:(PNPPersistenceLayerConfiguration *)configuration;
+- (instancetype)initWithConfiguration:(PNPPersistenceConfiguration *)configuration;
++ (instancetype)persistenceWithConfiguration:(PNPPersistenceConfiguration *)configuration;
 
 @property (nonatomic, assign) PNPStatusStorageOptions statusStorageOption;
 @property (nonatomic, assign) PNPPresenceEventsStorageOptions presenceEventsStorageOption;
@@ -32,3 +33,4 @@
 @property (nonatomic, strong, readonly) PNPStatus *currentStatus;
 
 @end
+

@@ -26,11 +26,11 @@
 }
 
 - (RLMResults *)dataSourceResults {
-    return self.persistenceLayer.presenceEvents;
+    return self.persistence.presenceEvents;
 }
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
-    PNPPresenceEvent *presenceEvent = [self.persistenceLayer.presenceEvents objectAtIndex:indexPath.row];
+    PNPPresenceEvent *presenceEvent = [self.persistence.presenceEvents objectAtIndex:indexPath.row];
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(presenceEvent.presenceTimetoken)];
     cell.textLabel.text = [NSString stringWithFormat:@"%@", presenceEvent.presenceEvent];

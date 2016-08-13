@@ -6,7 +6,7 @@
 //  Copyright © 2016 Jordan Zucker. All rights reserved.
 //
 
-#import <PubNubPersistence/PubNubPersistence.h>
+#import <PubNubPersistence/Persistence.h>
 #import "PNPStatusViewController.h"
 
 @interface PNPStatusViewController ()
@@ -26,14 +26,15 @@
 }
 
 - (RLMResults *)dataSourceResults {
-    return self.persistenceLayer.statuses;
+    return self.persistence.statuses;
 }
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
-    PNPStatus *status = [self.persistenceLayer.statuses objectAtIndex:indexPath.row];
+    PNPStatus *status = [self.persistence.statuses objectAtIndex:indexPath.row];
+    NSLog(@"implement %@", status);
     
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%lld", status.currentTimetoken];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", status.stringifiedCategory];
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%lld", status.currentTimetoken];
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@", status.stringifiedCategory];
 }
 
 /*

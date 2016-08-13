@@ -7,20 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Realm/Realm.h>
+#import "PNPResult.h"
 
 @class PNStatus;
-@class PNSubscribeStatus;
 
-@interface PNPStatus : RLMObject
+@interface PNPStatus : PNPResult
 
-@property NSString *identifier;
-@property NSString *stringifiedCategory;
-@property long long currentTimetoken;
-@property long long lastTimetoken;
-@property NSInteger statusCode;
+@property NSInteger category;
+@property BOOL error;
 
-- (instancetype)initWithStatus:(PNSubscribeStatus *)status;
-+ (instancetype)statusWithStatus:(PNSubscribeStatus *)status;
+
+- (instancetype)initWithStatus:(PNStatus *)status;
++ (instancetype)statusWithStatus:(PNStatus *)status;
 
 @end
