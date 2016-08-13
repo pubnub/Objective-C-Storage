@@ -8,6 +8,7 @@
 
 #import <PubNub/PubNub.h>
 #import "PNPResult.h"
+#import "PNPStatus.h"
 
 @implementation PNPResult
 
@@ -46,6 +47,12 @@
 
 + (NSString *)primaryKey {
     return @"identifier";
+}
+
++ (NSDictionary *)linkingObjectsProperties {
+    return @{
+             @"status": [RLMPropertyDescriptor descriptorWithClass:PNPStatus.class propertyName:@"result"],
+             };
 }
 
 @end

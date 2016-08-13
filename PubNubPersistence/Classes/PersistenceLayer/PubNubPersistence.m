@@ -12,6 +12,7 @@
 #import "PNPMessage.h"
 #import "PNPPresenceEvent.h"
 #import "PNPStatus.h"
+#import "PNPSubscribeStatus.h"
 
 @interface PubNubPersistence () <PNObjectEventListener>
 @property (nonatomic, strong, readwrite) PNPPersistenceConfiguration *configuration;
@@ -103,30 +104,59 @@
 
 - (void)client:(PubNub *)client didReceiveStatus:(PNStatus *)status {
     // handle heartbeat at some point!
-    PNSubscribeStatus *subscribeStatus = (PNSubscribeStatus *)status;
-    PNPWeakify(self);
-    dispatch_async(self.networkQueue, ^{
-        PNPStrongify(self);
-        // need to figure out the different options and implement all of them
-        switch (self->_statusStorageOption) {
-            case PNPStatusStorageOptionsCurrentStatus:
-            {
-                
+    PNStatus *addingStatus = status;
+    if ([status isKindOfClass:[PNSubscribeStatus class]]) {
+//        PNStatus *
+        PNPWeakify(self);
+        dispatch_async(self.networkQueue, ^{
+            PNPStrongify(self);
+            // need to figure out the different options and implement all of them
+            switch (self->_statusStorageOption) {
+                case PNPStatusStorageOptionsCurrentStatus:
+                {
+                    
+                }
+                    //                break; // uncomment this at some point
+                case PNPStatusStorageOptionsAll:
+                {
+                    RLMRealm *defaultRealm = [RLMRealm defaultRealm];
+                    [defaultRealm beginWriteTransaction];
+#warning check this out
+                    PNPSubscribeStatus *realmStatus = [PNPSubscribeStatus subscribeStatusWithSubscribeStatus:status];
+                    [defaultRealm addOrUpdateObject:realmStatus];
+                    [defaultRealm commitWriteTransaction];
+                }
+                    break;
+                case PNPStatusStorageOptionsNone:
+                    break;
             }
-                //                break; // uncomment this at some point
-            case PNPStatusStorageOptionsAll:
-            {
-                RLMRealm *defaultRealm = [RLMRealm defaultRealm];
-                [defaultRealm beginWriteTransaction];
-                PNPStatus *realmStatus = [PNPStatus statusWithStatus:subscribeStatus];
-                [defaultRealm addOrUpdateObject:realmStatus];
-                [defaultRealm commitWriteTransaction];
-            }
-                break;
-            case PNPStatusStorageOptionsNone:
-                break;
-        }
-    });
+        });
+    }
+//    PNSubscribeStatus *subscribeStatus = (PNSubscribeStatus *)status;
+//    PNPWeakify(self);
+//    dispatch_async(self.networkQueue, ^{
+//        PNPStrongify(self);
+//        // need to figure out the different options and implement all of them
+//        switch (self->_statusStorageOption) {
+//            case PNPStatusStorageOptionsCurrentStatus:
+//            {
+//                
+//            }
+//                //                break; // uncomment this at some point
+//            case PNPStatusStorageOptionsAll:
+//            {
+//                RLMRealm *defaultRealm = [RLMRealm defaultRealm];
+//                [defaultRealm beginWriteTransaction];
+//#warning check this out
+//                PNPStatus *realmStatus = [PNPStatus statusWithStatus:subscribeStatus];
+//                [defaultRealm addOrUpdateObject:realmStatus];
+//                [defaultRealm commitWriteTransaction];
+//            }
+//                break;
+//            case PNPStatusStorageOptionsNone:
+//                break;
+//        }
+//    });
 }
 
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {

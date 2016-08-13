@@ -7,14 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PNPResult.h"
+#import <Realm/Realm.h>
 
 @class PNStatus;
+@class PNPResult;
 
-@interface PNPStatus : PNPResult
+@interface PNPStatus : RLMObject
 
 @property NSInteger category;
 @property BOOL error;
+@property PNPResult *result;
+@property NSString *identifier;
 
 
 - (instancetype)initWithStatus:(PNStatus *)status;

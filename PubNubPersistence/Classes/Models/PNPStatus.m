@@ -7,7 +7,9 @@
 //
 
 #import <PubNub/PubNub.h>
+#import "PNPResult.h"
 #import "PNPStatus.h"
+#import "PNPSubscribeStatus.h"
 
 //@property long long currentTimetoken;
 //@property long long lastTimetoken;
@@ -17,7 +19,7 @@
 @implementation PNPStatus
 
 - (instancetype)initWithStatus:(PNStatus *)status {
-    NSParameterAssert(status);
+//    NSParameterAssert(status);
 //    NSMutableDictionary *value = [@{
 //                                    @"currentTimetoken": status.currentTimetoken,
 //                                    @"lastTimetoken": status.lastTimeToken,
@@ -25,11 +27,21 @@
 //                                    } mutableCopy];
 //    self = [self initWithValue:value.copy];
 //    return self;
-    self = [self initWithResult:status];
-    if (self) {
-        _category = (NSInteger)status.category;
-        _error = status.isError;
-    }
+//    self = [self initWithResult:status];
+//    if (self) {
+//        _category = (NSInteger)status.category;
+//        _error = status.isError;
+//    }
+//    return self;
+    NSLog(@"category: %d", status.category);
+    NSMutableDictionary *value = [@{
+                                    @"result": [PNPResult resultWithResult:(PNResult *)status],
+                                    @"identifier": [NSUUID UUID].UUIDString,
+                                    @"category": @((NSInteger)status.category),
+                                    @"error": @(status.isError),
+                                    } mutableCopy];
+#warning should this be self init?
+    self = [self initWithValue:value.copy];
     return self;
 }
 
@@ -41,13 +53,20 @@
 
 + (NSArray *)requiredProperties {
     return @[
+             @"identifier",
              @"category",
              @"error",
              ];
 }
 
 + (NSString *)primaryKey {
-    return [super primaryKey];
+    return @"identifier";
+}
+
++ (NSDictionary *)linkingObjectsProperties {
+    return @{
+             @"subscribeStatus": [RLMPropertyDescriptor descriptorWithClass:PNPSubscribeStatus.class propertyName:@"status"],
+             };
 }
 
 @end

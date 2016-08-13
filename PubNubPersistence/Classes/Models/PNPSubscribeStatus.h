@@ -7,17 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PNPStatus.h"
 
 @class PNSubscribeStatus;
 
-@interface PNPSubscribeStatus : PNPStatus
+@interface PNPSubscribeStatus : RLMObject
 
 @property NSString *subscribedChannel;
 @property NSString *actualChannel;
 @property long long timetoken;
 @property long long currentTimetoken;
 @property long long lastTimetoken;
+@property NSString *identifier;
+
+@property PNPStatus *status;
 
 - (instancetype)initWithSubscribeStatus:(PNSubscribeStatus *)status;
 + (instancetype)subscribeStatusWithSubscribeStatus:(PNSubscribeStatus *)status;
