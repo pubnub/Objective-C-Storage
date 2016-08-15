@@ -14,7 +14,6 @@
 @class PNPPersistenceConfiguration;
 @class RLMResults;
 @class PNPMessage;
-@class PNPStatus;
 
 @interface PubNubPersistence : NSObject
 
@@ -24,13 +23,7 @@
 - (instancetype)initWithConfiguration:(PNPPersistenceConfiguration *)configuration;
 + (instancetype)persistenceWithConfiguration:(PNPPersistenceConfiguration *)configuration;
 
-@property (nonatomic, assign) PNPStatusStorageOptions statusStorageOption;
-@property (nonatomic, assign) PNPPresenceEventsStorageOptions presenceEventsStorageOption;
-
 @property (nonatomic, strong, readonly) RLMResults *messages;
-@property (nonatomic, strong, readonly) RLMResults *statuses;
-@property (nonatomic, strong, readonly) RLMResults *presenceEvents;
-@property (nonatomic, strong, readonly) PNPStatus *currentStatus;
 
 @end
 

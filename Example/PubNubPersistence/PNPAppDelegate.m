@@ -53,10 +53,6 @@
 - (void)testRealm {
     RLMResults *messages = [PNPMessage allObjects];
     NSLog(@"messages: %@", messages);
-    RLMResults *statuses = [PNPStatus allObjects];
-    NSLog(@"statuses: %@", statuses);
-    RLMResults *presenceEvents = [PNPPresenceEvent allObjects];
-    NSLog(@"presenceEvents: %@", presenceEvents);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self testRealm];
     });

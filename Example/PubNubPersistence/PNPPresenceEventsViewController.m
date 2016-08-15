@@ -25,16 +25,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (RLMResults *)dataSourceResults {
-    return self.persistence.presenceEvents;
-}
+//- (RLMResults *)dataSourceResults {
+//    return self.persistence.presenceEvents;
+//}
 
-- (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
-    PNPPresenceEvent *presenceEvent = [self.persistence.presenceEvents objectAtIndex:indexPath.row];
-    
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(presenceEvent.presenceTimetoken)];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", presenceEvent.presenceEvent];
-}
+//- (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
+//    PNPPresenceEvent *presenceEvent = [self.persistence.presenceEvents objectAtIndex:indexPath.row];
+//    
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(presenceEvent.presenceTimetoken)];
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@", presenceEvent.presenceEvent];
+//}
 
 /*
 #pragma mark - Navigation

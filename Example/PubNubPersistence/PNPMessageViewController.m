@@ -6,7 +6,7 @@
 //  Copyright © 2016 Jordan Zucker. All rights reserved.
 //
 
-#import <PubNubPersistence/PubNubPersistence.h>
+#import <PubNubPersistence/Persistence.h>
 #import "PNPMessageViewController.h"
 
 @interface PNPMessageViewController ()

@@ -16,8 +16,6 @@
     self = [super init];
     if (self) {
         _client = client;
-        _statusStorageOption = kPNPDefaultStatusStorageOption;
-        _presenceEventsStorageOption = kPNPDefaultPresenceEventsStorageOption;
     }
     return self;
 }
@@ -30,8 +28,6 @@
 
 - (id)copyWithZone:(NSZone *)zone {
     PNPPersistenceConfiguration *configuration = [[[self class] allocWithZone:zone] initWithClient:self.client];
-    configuration.statusStorageOption = self.statusStorageOption;
-    configuration.presenceEventsStorageOption = self.presenceEventsStorageOption;
     return configuration;
 }
 

@@ -15,11 +15,6 @@
 #import "PNPPersistenceConfiguration.h"
 #import "PubNubPersistence.h"
 
-#import "PNPResult.h"
-#import "PNPStatus.h"
-#import "PNPSubscribeStatus.h"
 #import "PNPMessage.h"
-#import "PNPPresenceEvent.h"
-
 
 #endif /* Persistence_h */

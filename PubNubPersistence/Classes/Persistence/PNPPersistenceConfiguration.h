@@ -17,7 +17,5 @@
 + (instancetype)persistenceConfigurationWithClient:(PubNub *)client;
 
 @property (nonatomic, strong) PubNub *client;
-@property (nonatomic, assign) PNPStatusStorageOptions statusStorageOption;
-@property (nonatomic, assign) PNPPresenceEventsStorageOptions presenceEventsStorageOption;
 
 @end
