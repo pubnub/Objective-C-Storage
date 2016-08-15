@@ -36,6 +36,12 @@
     return [[self alloc] initWithConfiguration:configuration];
 }
 
+#pragma mark - Destructors
+
+- (void)dealloc {
+    [self.client removeListener:self];
+}
+
 #pragma mark - Getters
 
 - (PubNub *)client {
@@ -52,11 +58,14 @@
 
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
     dispatch_async(self.networkQueue, ^{
-        RLMRealm *defaultRealm = [RLMRealm defaultRealm];
-        [defaultRealm beginWriteTransaction];
-        PNPMessage *realmMessage = [PNPMessage messageWithMessage:message];
-        [defaultRealm addOrUpdateObject:realmMessage];
-        [defaultRealm commitWriteTransaction];
+        // probably don't need this, just in case
+        @autoreleasepool {
+            RLMRealm *defaultRealm = [RLMRealm defaultRealm];
+            [defaultRealm beginWriteTransaction];
+            PNPMessage *realmMessage = [PNPMessage messageWithMessage:message];
+            [defaultRealm addOrUpdateObject:realmMessage];
+            [defaultRealm commitWriteTransaction];
+        }
     });
 }
 
