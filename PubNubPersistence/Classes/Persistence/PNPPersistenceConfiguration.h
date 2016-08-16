@@ -11,11 +11,15 @@
 
 @class PubNub;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface PNPPersistenceConfiguration : NSObject <NSCopying>
 
 - (instancetype)initWithClient:(PubNub *)client;
 + (instancetype)persistenceConfigurationWithClient:(PubNub *)client;
 
-@property (nonatomic, strong) PubNub *client;
+@property (nonatomic, strong, readonly) PubNub *client;
 
 @end
+
+NS_ASSUME_NONNULL_END

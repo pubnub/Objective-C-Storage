@@ -15,6 +15,8 @@
 @class RLMResults;
 @class PNPMessage;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface PubNubPersistence : NSObject
 
 @property (nonatomic, strong, readonly) PubNub *client;
@@ -27,3 +29,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

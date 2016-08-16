@@ -9,6 +9,10 @@
 #import <PubNub/PubNub.h>
 #import "PNPPersistenceConfiguration.h"
 
+@interface PNPPersistenceConfiguration ()
+@property (nonatomic, strong, readwrite) PubNub *client;
+@end
+
 @implementation PNPPersistenceConfiguration
 
 - (instancetype)initWithClient:(PubNub *)client {

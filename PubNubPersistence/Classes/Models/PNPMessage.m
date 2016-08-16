@@ -19,7 +19,6 @@
                                     @"rawMessage": [[self class] dataForMessage:message.data.message],
                                     @"subscribedChannel": message.data.subscribedChannel,
                                     @"timetoken": message.data.timetoken,
-                                    @"identifier": [NSUUID UUID].UUIDString,
                                     } mutableCopy];
     if (message.data.actualChannel) {
         value[@"actualChannel"] = message.data.actualChannel;
@@ -58,6 +57,26 @@
              @"subscribedChannel",
              @"timetoken",
              @"identifier",
+             @"creationDate",
+             ];
+}
+
++ (NSDictionary *)defaultPropertyValues {
+    return @{
+             @"creationDate": [NSDate date],
+             @"identifier": [NSUUID UUID].UUIDString,
+             };
+}
+
++ (NSArray *)ignoredProperties {
+    return @[
+             @"message",
+             ];
+}
+
++ (NSArray *)indexedProperties {
+    return @[
+             @"creationDate",
              ];
 }
 

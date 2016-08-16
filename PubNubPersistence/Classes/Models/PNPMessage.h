@@ -11,6 +11,8 @@
 
 @class PNMessageResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface PNPMessage : RLMObject
 
 @property NSData *rawMessage;
@@ -19,9 +21,11 @@
 @property NSString *actualChannel;
 @property long long timetoken;
 @property NSString *identifier;
+@property NSDate *creationDate;
 
 - (instancetype)initWithMessage:(PNMessageResult *)message;
 + (instancetype)messageWithMessage:(PNMessageResult *)message;
 
-
 @end
+
+NS_ASSUME_NONNULL_END
