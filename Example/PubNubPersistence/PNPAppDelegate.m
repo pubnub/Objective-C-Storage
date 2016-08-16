@@ -7,18 +7,18 @@
 //
 
 #import <PubNub/PubNub.h>
-#import <PubNubPersistence/PubNubPersistence.h>
+#import <PubNubPersistence/Persistence.h>
 #import "PNPAppDelegate.h"
 
 @interface PNPAppDelegate ()
 //@property (nonatomic, strong, readwrite) PNPPersistenceLayer *persistenceLayer;
-@property (nonatomic, strong, readonly) PubNub *client;
+@property (nonatomic, strong, readwrite) PubNub *client;
 
 @end
 
 @implementation PNPAppDelegate
 @synthesize client = _client;
-@synthesize persistenceLayer = _persistenceLayer;
+@synthesize persistence = _persistence;
 
 - (PubNub *)client {
     if (!_client) {
@@ -28,12 +28,12 @@
     return _client;
 }
 
-- (PNPPersistenceLayer *)persistenceLayer {
-    if (!_persistenceLayer) {
-        PNPPersistenceLayerConfiguration *persistenceConfig = [PNPPersistenceLayerConfiguration persistenceLayerConfigurationWithClient:self.client];
-        _persistenceLayer = [PNPPersistenceLayer persistenceLayerWithConfiguration:persistenceConfig];
+- (PubNubPersistence *)persistence {
+    if (!_persistence) {
+        PNPPersistenceConfiguration *persistenceConfig = [PNPPersistenceConfiguration persistenceConfigurationWithClient:self.client];
+        _persistence = [PubNubPersistence persistenceWithConfiguration:persistenceConfig];
     }
-    return _persistenceLayer;
+    return _persistence;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -53,10 +53,6 @@
 - (void)testRealm {
     RLMResults *messages = [PNPMessage allObjects];
     NSLog(@"messages: %@", messages);
-    RLMResults *statuses = [PNPStatus allObjects];
-    NSLog(@"statuses: %@", statuses);
-    RLMResults *presenceEvents = [PNPPresenceEvent allObjects];
-    NSLog(@"presenceEvents: %@", presenceEvents);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self testRealm];
     });

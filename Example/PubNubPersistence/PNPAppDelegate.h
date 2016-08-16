@@ -8,11 +8,13 @@
 
 @import UIKit;
 
-@class PNPPersistenceLayer;
+@class PubNub;
+@class PubNubPersistence;
 
 @interface PNPAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, strong, readonly) PNPPersistenceLayer *persistenceLayer;
+@property (nonatomic, strong, readonly) PubNubPersistence *persistence;
+@property (nonatomic, strong, readonly) PubNub *client;
 
 @end

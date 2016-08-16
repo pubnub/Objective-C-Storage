@@ -7,13 +7,14 @@
 //
 
 @import UIKit;
+#import "PNPPubNubViewController.h"
 
 @class RLMResults;
-@class PNPPersistenceLayer;
+@class PubNubPersistence;
 
-@interface PNPViewController : UIViewController
+@interface PNPViewController : PNPPubNubViewController
 
-@property (nonatomic, strong, readonly) PNPPersistenceLayer *persistenceLayer;
+@property (nonatomic, strong, readonly) PubNubPersistence *persistence;
 
 - (RLMResults *)dataSourceResults;
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath;

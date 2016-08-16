@@ -1,19 +1,29 @@
 //
-//  PNPMessageViewController.m
+//  PNPPubNubViewController.m
 //  PubNubPersistence
 //
-//  Created by Jordan Zucker on 7/8/16.
+//  Created by Jordan Zucker on 7/11/16.
 //  Copyright © 2016 Jordan Zucker. All rights reserved.
 //
 
-#import <PubNubPersistence/Persistence.h>
-#import "PNPMessageViewController.h"
+#import <PubNub/PubNub.h>
+#import "PNPAppDelegate.h"
+#import "PNPPubNubViewController.h"
 
-@interface PNPMessageViewController ()
-
+@interface PNPPubNubViewController ()
+@property (nonatomic, strong, readwrite) PubNub *client;
 @end
 
-@implementation PNPMessageViewController
+@implementation PNPPubNubViewController
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
+        _client = appDelegate.client;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,17 +33,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (RLMResults *)dataSourceResults {
-    return self.persistence.messages;
-}
-
-- (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
-    PNPMessage *message = [self.persistence.messages objectAtIndex:indexPath.row];
-
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", message.message];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(message.timetoken)];
 }
 
 /*

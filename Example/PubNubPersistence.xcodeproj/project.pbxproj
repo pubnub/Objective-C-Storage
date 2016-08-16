@@ -12,6 +12,8 @@
 		51285BBF1D30349600A12879 /* PNPMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51285BBE1D30349600A12879 /* PNPMessageViewController.m */; };
 		51285BC21D3034A400A12879 /* PNPStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51285BC11D3034A400A12879 /* PNPStatusViewController.m */; };
 		51285BC51D3034D300A12879 /* PNPPresenceEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51285BC41D3034D300A12879 /* PNPPresenceEventsViewController.m */; };
+		518D94481D347D8700C2FC0E /* PNPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 518D94471D347D8700C2FC0E /* PNPDebugViewController.m */; };
+		518D944B1D347E2500C2FC0E /* PNPPubNubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 518D944A1D347E2500C2FC0E /* PNPPubNubViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -51,6 +53,10 @@
 		51285BC11D3034A400A12879 /* PNPStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPStatusViewController.m; sourceTree = "<group>"; };
 		51285BC31D3034D300A12879 /* PNPPresenceEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPPresenceEventsViewController.h; sourceTree = "<group>"; };
 		51285BC41D3034D300A12879 /* PNPPresenceEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPPresenceEventsViewController.m; sourceTree = "<group>"; };
+		518D94461D347D8700C2FC0E /* PNPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPDebugViewController.h; sourceTree = "<group>"; };
+		518D94471D347D8700C2FC0E /* PNPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPDebugViewController.m; sourceTree = "<group>"; };
+		518D94491D347E2500C2FC0E /* PNPPubNubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPPubNubViewController.h; sourceTree = "<group>"; };
+		518D944A1D347E2500C2FC0E /* PNPPubNubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPPubNubViewController.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* PubNubPersistence_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PubNubPersistence_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -155,6 +161,10 @@
 				51285BC41D3034D300A12879 /* PNPPresenceEventsViewController.m */,
 				51285BB41D2F16A300A12879 /* PNPMessageTableViewCell.h */,
 				51285BB51D2F16A300A12879 /* PNPMessageTableViewCell.m */,
+				518D94461D347D8700C2FC0E /* PNPDebugViewController.h */,
+				518D94471D347D8700C2FC0E /* PNPDebugViewController.m */,
+				518D94491D347E2500C2FC0E /* PNPPubNubViewController.h */,
+				518D944A1D347E2500C2FC0E /* PNPPubNubViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -417,6 +427,8 @@
 				51285BB61D2F16A300A12879 /* PNPMessageTableViewCell.m in Sources */,
 				51285BC51D3034D300A12879 /* PNPPresenceEventsViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				518D94481D347D8700C2FC0E /* PNPDebugViewController.m in Sources */,
+				518D944B1D347E2500C2FC0E /* PNPPubNubViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

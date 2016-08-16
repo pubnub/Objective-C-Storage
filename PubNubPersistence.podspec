@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PubNubPersistence'
-  s.version          = '0.2.0'
+  s.version          = '0.3.0'
   s.summary          = 'A thin persistence layer for PubNub in an Objective-C environment.'
 
 # This description is used to generate tags and improve search results.
@@ -39,5 +39,5 @@ This is is a persistence layer for PubNub in an Objective-C environemnt for stor
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'PubNub'
-  s.dependency 'Realm', '~> 1.0.1'
+  s.dependency 'Realm', '~> 1.0.2'
 end
