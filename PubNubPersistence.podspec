@@ -33,7 +33,7 @@ This is is a persistence layer for PubNub in an Objective-C environemnt for stor
   s.source_files = 'PubNubPersistence/Classes/**/*'
   
   s.resource_bundles = {
-    'PubNubPersistence' => ['PubNubPersistence/Assets/PubNubPersistence.xcdatamodeld']
+    'DataModel' => ['PubNubPersistence/Assets/PubNubPersistence.xcdatamodeld']
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'

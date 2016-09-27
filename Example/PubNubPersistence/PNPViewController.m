@@ -8,6 +8,7 @@
 
 @import CoreData;
 #import "PNPViewController.h"
+#import "PNPAppDelegate.h"
 #import <PubNubPersistence/Persistence.h>
 #import "PNPMessageTableViewCell.h"
 
@@ -41,6 +42,9 @@
     self.tableView.dataSource = self;
     
     NSError *error;
+        
+    [self.fetchedResultsController performFetch:&error];
+    NSAssert(!error, @"%@", error.debugDescription);
     
 }
 

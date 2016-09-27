@@ -11,7 +11,7 @@
 #import "PNPAppDelegate.h"
 
 @interface PNPAppDelegate ()
-//@property (nonatomic, strong, readwrite) PNPPersistenceLayer *persistenceLayer;
+@property (nonatomic, strong, readwrite) PubNubPersistence *persistence;
 @property (nonatomic, strong, readwrite) PubNub *client;
 
 @end
@@ -24,16 +24,10 @@
     if (!_client) {
         PNConfiguration *config = [PNConfiguration configurationWithPublishKey:@"demo-36" subscribeKey:@"demo-36"];
         _client = [PubNub clientWithConfiguration:config];
+        _client.logger.enabled = YES;
+        [_client.logger setLogLevel:PNVerboseLogLevel];
     }
     return _client;
-}
-
-- (PubNubPersistence *)persistence {
-    if (!_persistence) {
-        PNPPersistenceConfiguration *persistenceConfig = [PNPPersistenceConfiguration persistenceConfigurationWithClient:self.client];
-        _persistence = [PubNubPersistence persistenceWithConfiguration:persistenceConfig];
-    }
-    return _persistence;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -42,6 +36,8 @@
 //    self.client = [PubNub clientWithConfiguration:config];
 //    PNPPersistenceLayerConfiguration *persistenceConfig = [PNPPersistenceLayerConfiguration persistenceLayerConfigurationWithClient:self.client];
 //    self.persistenceLayer = [PNPPersistenceLayer persistenceLayerWithConfiguration:persistenceConfig];
+    PNPPersistenceConfiguration *config = [PNPPersistenceConfiguration persistenceConfigurationWithClient:self.client];
+    self.persistence = [PubNubPersistence persistenceWithConfiguration:config];
     [self.client subscribeToChannels:@[@"a"] withPresence:YES];
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

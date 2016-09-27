@@ -6,6 +6,7 @@
 //
 //
 
+@import CoreData;
 #import <Foundation/Foundation.h>
 
 #import "PNPConstants.h"
@@ -22,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithConfiguration:(PNPPersistenceConfiguration *)configuration;
 + (instancetype)persistenceWithConfiguration:(PNPPersistenceConfiguration *)configuration;
+
+@property (readonly, strong) NSPersistentContainer *persistentContainer;
+
+- (void)saveContext;
 
 @end
 

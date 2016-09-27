@@ -9,6 +9,7 @@
 #import <PubNub/PubNub.h>
 #import "PNPPersistenceConfiguration.h"
 #import "PubNubPersistence.h"
+#import "PNPMessage+CoreDataClass.h"
 
 @interface PubNubPersistence () <PNObjectEventListener>
 @property (nonatomic, strong, readwrite) PNPPersistenceConfiguration *configuration;
@@ -52,10 +53,66 @@
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
     dispatch_async(self.networkQueue, ^{
         // probably don't need this, just in case
-        @autoreleasepool {
-            NSLog(@"whatever");
-        }
+        [self.persistentContainer performBackgroundTask:^(NSManagedObjectContext * _Nonnull context) {
+            PNPMessage *createdMessage = [PNPMessage messageWithMessage:message inContext:context];
+            NSError *saveError;
+            [context save:&saveError];
+            NSAssert(!saveError, @"%@", saveError.debugDescription);
+        }];
     });
+}
+
+@synthesize persistentContainer = _persistentContainer;
+
+- (NSPersistentContainer *)persistentContainer {
+    // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
+    @synchronized (self) {
+        if (_persistentContainer == nil) {
+            
+            NSBundle *podBundle = [NSBundle bundleForClass:self.classForCoder];
+            NSURL *dataModelBundleURL = [podBundle URLForResource:@"DataModel" withExtension:@"bundle"];
+            NSBundle *dataModelBundle = [NSBundle bundleWithURL:dataModelBundleURL];
+            //NSURL *dataModelURL = [dataModelBundle URLForResource:@"PubNubPersistence" withExtension:@"xcdatamodeld"];
+            //NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"DataModel" ofType:@"bundle"];
+            //NSBundle *podBundle = [NSBundle bundleWithPath:bundlePath];
+            NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:@[dataModelBundle]];
+            
+            //NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:dataModelURL];
+            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"PubNubPersistence" managedObjectModel:model];
+            _persistentContainer.viewContext.automaticallyMergesChangesFromParent = YES;
+            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
+                if (error != nil) {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    
+                    /*
+                     Typical reasons for an error here include:
+                     * The parent directory does not exist, cannot be created, or disallows writing.
+                     * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                     * The device is out of space.
+                     * The store could not be migrated to the current model version.
+                     Check the error message to determine what the actual problem was.
+                     */
+                    NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+                    abort();
+                }
+            }];
+        }
+    }
+    return _persistentContainer;
+}
+
+#pragma mark - Core Data Saving support
+
+- (void)saveContext {
+    NSManagedObjectContext *context = self.persistentContainer.viewContext;
+    NSError *error = nil;
+    if ([context hasChanges] && ![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+        abort();
+    }
 }
 
 @end
