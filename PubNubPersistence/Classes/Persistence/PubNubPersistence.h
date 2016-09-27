@@ -12,8 +12,6 @@
 
 @class PubNub;
 @class PNPPersistenceConfiguration;
-@class RLMResults;
-@class PNPMessage;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,8 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithConfiguration:(PNPPersistenceConfiguration *)configuration;
 + (instancetype)persistenceWithConfiguration:(PNPPersistenceConfiguration *)configuration;
-
-@property (nonatomic, strong, readonly) RLMResults *messages;
 
 @end
 

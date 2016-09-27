@@ -8,19 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		491775CB27883D68D307253D /* Pods_PubNubPersistence_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4815EDD53E299791F04647E /* Pods_PubNubPersistence_Example.framework */; };
-		51285BB61D2F16A300A12879 /* PNPMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51285BB51D2F16A300A12879 /* PNPMessageTableViewCell.m */; };
-		51285BBF1D30349600A12879 /* PNPMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51285BBE1D30349600A12879 /* PNPMessageViewController.m */; };
-		51285BC21D3034A400A12879 /* PNPStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51285BC11D3034A400A12879 /* PNPStatusViewController.m */; };
-		51285BC51D3034D300A12879 /* PNPPresenceEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51285BC41D3034D300A12879 /* PNPPresenceEventsViewController.m */; };
-		518D94481D347D8700C2FC0E /* PNPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 518D94471D347D8700C2FC0E /* PNPDebugViewController.m */; };
-		518D944B1D347E2500C2FC0E /* PNPPubNubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 518D944A1D347E2500C2FC0E /* PNPPubNubViewController.m */; };
+		51C0AA6C1D9B16F600CE34D8 /* PNPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C0AA6B1D9B16F600CE34D8 /* PNPViewController.m */; };
+		51C0AA6F1D9B18B500CE34D8 /* PNPMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C0AA6E1D9B18B500CE34D8 /* PNPMessageTableViewCell.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* PNPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* PNPAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* PNPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* PNPViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -45,18 +40,10 @@
 		0927B634BB3EBCDB61D6E00A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		3E639ACEF97E2444173C5DF2 /* Pods-PubNubPersistence_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PubNubPersistence_Tests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-PubNubPersistence_Tests/Pods-PubNubPersistence_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		446FBB9E79D8F682B0360BE5 /* Pods-PubNubPersistence_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PubNubPersistence_Example.release.xcconfig"; path = "../Pods/Target Support Files/Pods-PubNubPersistence_Example/Pods-PubNubPersistence_Example.release.xcconfig"; sourceTree = "<group>"; };
-		51285BB41D2F16A300A12879 /* PNPMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPMessageTableViewCell.h; sourceTree = "<group>"; };
-		51285BB51D2F16A300A12879 /* PNPMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPMessageTableViewCell.m; sourceTree = "<group>"; };
-		51285BBD1D30349600A12879 /* PNPMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPMessageViewController.h; sourceTree = "<group>"; };
-		51285BBE1D30349600A12879 /* PNPMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPMessageViewController.m; sourceTree = "<group>"; };
-		51285BC01D3034A400A12879 /* PNPStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPStatusViewController.h; sourceTree = "<group>"; };
-		51285BC11D3034A400A12879 /* PNPStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPStatusViewController.m; sourceTree = "<group>"; };
-		51285BC31D3034D300A12879 /* PNPPresenceEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPPresenceEventsViewController.h; sourceTree = "<group>"; };
-		51285BC41D3034D300A12879 /* PNPPresenceEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPPresenceEventsViewController.m; sourceTree = "<group>"; };
-		518D94461D347D8700C2FC0E /* PNPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPDebugViewController.h; sourceTree = "<group>"; };
-		518D94471D347D8700C2FC0E /* PNPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPDebugViewController.m; sourceTree = "<group>"; };
-		518D94491D347E2500C2FC0E /* PNPPubNubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPPubNubViewController.h; sourceTree = "<group>"; };
-		518D944A1D347E2500C2FC0E /* PNPPubNubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPPubNubViewController.m; sourceTree = "<group>"; };
+		51C0AA6A1D9B16F600CE34D8 /* PNPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPViewController.h; sourceTree = "<group>"; };
+		51C0AA6B1D9B16F600CE34D8 /* PNPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPViewController.m; sourceTree = "<group>"; };
+		51C0AA6D1D9B18B500CE34D8 /* PNPMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPMessageTableViewCell.h; sourceTree = "<group>"; };
+		51C0AA6E1D9B18B500CE34D8 /* PNPMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPMessageTableViewCell.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* PubNubPersistence_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PubNubPersistence_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -67,8 +54,6 @@
 		6003F59B195388D20070C39A /* PubNubPersistence-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PubNubPersistence-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* PNPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PNPAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* PNPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PNPAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* PNPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PNPViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* PNPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PNPViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* PubNubPersistence_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PubNubPersistence_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -151,20 +136,10 @@
 				6003F59C195388D20070C39A /* PNPAppDelegate.h */,
 				6003F59D195388D20070C39A /* PNPAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* PNPViewController.h */,
-				6003F5A6195388D20070C39A /* PNPViewController.m */,
-				51285BBD1D30349600A12879 /* PNPMessageViewController.h */,
-				51285BBE1D30349600A12879 /* PNPMessageViewController.m */,
-				51285BC01D3034A400A12879 /* PNPStatusViewController.h */,
-				51285BC11D3034A400A12879 /* PNPStatusViewController.m */,
-				51285BC31D3034D300A12879 /* PNPPresenceEventsViewController.h */,
-				51285BC41D3034D300A12879 /* PNPPresenceEventsViewController.m */,
-				51285BB41D2F16A300A12879 /* PNPMessageTableViewCell.h */,
-				51285BB51D2F16A300A12879 /* PNPMessageTableViewCell.m */,
-				518D94461D347D8700C2FC0E /* PNPDebugViewController.h */,
-				518D94471D347D8700C2FC0E /* PNPDebugViewController.m */,
-				518D94491D347E2500C2FC0E /* PNPPubNubViewController.h */,
-				518D944A1D347E2500C2FC0E /* PNPPubNubViewController.m */,
+				51C0AA6A1D9B16F600CE34D8 /* PNPViewController.h */,
+				51C0AA6B1D9B16F600CE34D8 /* PNPViewController.m */,
+				51C0AA6D1D9B18B500CE34D8 /* PNPMessageTableViewCell.h */,
+				51C0AA6E1D9B18B500CE34D8 /* PNPMessageTableViewCell.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -420,15 +395,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51285BBF1D30349600A12879 /* PNPMessageViewController.m in Sources */,
 				6003F59E195388D20070C39A /* PNPAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* PNPViewController.m in Sources */,
-				51285BC21D3034A400A12879 /* PNPStatusViewController.m in Sources */,
-				51285BB61D2F16A300A12879 /* PNPMessageTableViewCell.m in Sources */,
-				51285BC51D3034D300A12879 /* PNPPresenceEventsViewController.m in Sources */,
+				51C0AA6C1D9B16F600CE34D8 /* PNPViewController.m in Sources */,
+				51C0AA6F1D9B18B500CE34D8 /* PNPMessageTableViewCell.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				518D94481D347D8700C2FC0E /* PNPDebugViewController.m in Sources */,
-				518D944B1D347E2500C2FC0E /* PNPPubNubViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

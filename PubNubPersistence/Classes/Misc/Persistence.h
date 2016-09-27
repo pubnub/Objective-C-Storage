@@ -9,12 +9,10 @@
 #ifndef Persistence_h
 #define Persistence_h
 
-#import <Realm/Realm.h>
-
 #import "PNPConstants.h"
 #import "PNPPersistenceConfiguration.h"
 #import "PubNubPersistence.h"
 
-#import "PNPMessage.h"
+#import "PNPMessage+CoreDataProperties.h"
 
 #endif /* Persistence_h */

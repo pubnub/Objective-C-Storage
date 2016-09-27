@@ -9,7 +9,6 @@
 #import <PubNub/PubNub.h>
 #import "PNPPersistenceConfiguration.h"
 #import "PubNubPersistence.h"
-#import "PNPMessage.h"
 
 @interface PubNubPersistence () <PNObjectEventListener>
 @property (nonatomic, strong, readwrite) PNPPersistenceConfiguration *configuration;
@@ -48,23 +47,13 @@
     return self.configuration.client;
 }
 
-#pragma mark - Methods
-
-- (RLMResults *)messages {
-    return [PNPMessage allObjects];
-}
-
 #pragma mark - PNObjectEventListener
 
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
     dispatch_async(self.networkQueue, ^{
         // probably don't need this, just in case
         @autoreleasepool {
-            RLMRealm *defaultRealm = [RLMRealm defaultRealm];
-            [defaultRealm beginWriteTransaction];
-            PNPMessage *realmMessage = [PNPMessage messageWithMessage:message];
-            [defaultRealm addOrUpdateObject:realmMessage];
-            [defaultRealm commitWriteTransaction];
+            NSLog(@"whatever");
         }
     });
 }

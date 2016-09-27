@@ -2,67 +2,46 @@
 //  PNPViewController.m
 //  PubNubPersistence
 //
-//  Created by Jordan Zucker on 07/07/2016.
-//  Copyright (c) 2016 Jordan Zucker. All rights reserved.
+//  Created by Jordan Zucker on 9/27/16.
+//  Copyright © 2016 Jordan Zucker. All rights reserved.
 //
 
-#import <PubNubPersistence/Persistence.h>
-#import "PNPAppDelegate.h"
+@import CoreData;
 #import "PNPViewController.h"
+#import <PubNubPersistence/Persistence.h>
 #import "PNPMessageTableViewCell.h"
 
-@interface PNPViewController () <
-                                    UITableViewDelegate,
-                                    UITableViewDataSource
-                                >
+@interface PNPViewController () <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong, readwrite) PubNubPersistence *persistence;
-@property (nonatomic, strong) RLMNotificationToken *updateNotificationToken;
-
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation PNPViewController
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
-        _persistence = appDelegate.persistence;
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (!_fetchedResultsController) {
+        NSFetchRequest *request = [PNPMessage fetchRequest];
+        NSSortDescriptor *creationDateSort = [NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES];
+        request.sortDescriptors = @[
+                                    creationDateSort,
+                                    ];
+        _fetchedResultsController = [[NSFetchedResultsController alloc] init];
+        _fetchedResultsController.delegate = self;
     }
-    return self;
+    return _fetchedResultsController;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view.
     self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+    [self.view addSubview:self.tableView];
     [self.tableView registerClass:[PNPMessageTableViewCell class] forCellReuseIdentifier:[PNPMessageTableViewCell reuseIdentifier]];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self.view addSubview:self.tableView];
     
-    PNPWeakify(self);
-    self.updateNotificationToken = [self.dataSourceResults addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Failed to open realm on background worker: %@", error);
-            return;
-        }
-        PNPStrongify(self);
-        UITableView *currentTableView = self.tableView;
-        
-        // Initial run of the query will pass nil for the change information
-        if (!change) {
-            [currentTableView reloadData];
-            return;
-        }
-        
-        // Query results have changed, so apply them to the UITableView
-        [currentTableView beginUpdates];
-        [currentTableView deleteRowsAtIndexPaths:[change deletionsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [currentTableView insertRowsAtIndexPaths:[change insertionsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [currentTableView reloadRowsAtIndexPaths:[change modificationsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [currentTableView endUpdates];
-    }];
+    NSError *error;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,39 +49,105 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [self.updateNotificationToken stop];
-}
+/*
+#pragma mark - Navigation
 
-- (RLMResults *)dataSourceResults {
-    return nil;
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
-
-#pragma mark - UITableViewDelegate
+*/
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.fetchedResultsController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSourceResults.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PNPMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PNPMessageTableViewCell reuseIdentifier] forIndexPath:indexPath];
-    [self configureCell:(UITableViewCell *)cell forIndexPath:indexPath];
     
-//    PNPMessage *message = [self.persistenceLayer.messages objectAtIndex:indexPath.row];
-//    
-//    cell.textLabel.text = [NSString stringWithFormat:@"%@", message.message];
-//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(message.timetoken)];
-    return cell;
+    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections objectAtIndex:section];
+    
+    return [sectionInfo numberOfObjects];
 }
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
-    
+    PNPMessageTableViewCell *messageCell = (PNPMessageTableViewCell *)cell;
+    PNPMessage *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [messageCell update:message];
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PNPMessageTableViewCell reuseIdentifier] forIndexPath:indexPath];
+    [self configureCell:cell forIndexPath:indexPath];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = self.tableView;
+    
+    switch (type) {
+            case NSFetchedResultsChangeInsert:
+        {
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+            break;
+            case NSFetchedResultsChangeDelete:
+        {
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+            break;
+            case NSFetchedResultsChangeMove:
+        {
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+            break;
+            case NSFetchedResultsChangeUpdate:
+        {
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] forIndexPath:indexPath];
+        }
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id )sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    switch (type) {
+            case NSFetchedResultsChangeInsert:
+        {
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+        }
+            break;
+            case NSFetchedResultsChangeDelete:
+        {
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+        }
+            break;
+            default:
+        {
+            NSLog(@"other");
+        }
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
+}
+
+
 
 @end

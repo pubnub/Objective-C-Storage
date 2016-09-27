@@ -1,23 +1,9 @@
 PODS:
-  - CocoaLumberjack (2.3.0):
-    - CocoaLumberjack/Default (= 2.3.0)
-    - CocoaLumberjack/Extensions (= 2.3.0)
-  - CocoaLumberjack/Core (2.3.0)
-  - CocoaLumberjack/Default (2.3.0):
-    - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.3.0):
-    - CocoaLumberjack/Default
-  - PubNub (4.4.1):
-    - CocoaLumberjack (= 2.3.0)
-    - PubNub/Core (= 4.4.1)
-  - PubNub/Core (4.4.1):
-    - CocoaLumberjack (= 2.3.0)
-  - PubNubPersistence (0.3.0):
+  - PubNub (4.5.3):
+    - PubNub/Core (= 4.5.3)
+  - PubNub/Core (4.5.3)
+  - PubNubPersistence (0.5.0):
     - PubNub
-    - Realm (~> 1.0.2)
-  - Realm (1.0.2):
-    - Realm/Headers (= 1.0.2)
-  - Realm/Headers (1.0.2)
 
 DEPENDENCIES:
   - PubNub
@@ -28,10 +14,8 @@ EXTERNAL SOURCES:
     :path: .
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
-  PubNub: 7c59158178877fed5004df938cd31d030856f54e
-  PubNubPersistence: 6f0fdc0a2ded904823194e07aaa22eabe5d44320
-  Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
+  PubNub: 42623b6046ab65bb2ec9c4fb51791d86aa956926
+  PubNubPersistence: cf4d001a8a924837cd253ecf8b7a1aa9069004d8
 
 PODFILE CHECKSUM: 53993e6e1e6bfc6ba6b7418dce077f4670c8c554
 

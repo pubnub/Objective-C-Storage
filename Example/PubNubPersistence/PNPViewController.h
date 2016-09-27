@@ -2,21 +2,12 @@
 //  PNPViewController.h
 //  PubNubPersistence
 //
-//  Created by Jordan Zucker on 07/07/2016.
-//  Copyright (c) 2016 Jordan Zucker. All rights reserved.
+//  Created by Jordan Zucker on 9/27/16.
+//  Copyright © 2016 Jordan Zucker. All rights reserved.
 //
 
-@import UIKit;
-#import "PNPPubNubViewController.h"
+#import <UIKit/UIKit.h>
 
-@class RLMResults;
-@class PubNubPersistence;
-
-@interface PNPViewController : PNPPubNubViewController
-
-@property (nonatomic, strong, readonly) PubNubPersistence *persistence;
-
-- (RLMResults *)dataSourceResults;
-- (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath;
+@interface PNPViewController : UIViewController
 
 @end

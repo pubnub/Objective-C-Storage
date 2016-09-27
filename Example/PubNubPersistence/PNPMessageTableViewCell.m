@@ -2,7 +2,7 @@
 //  PNPMessageTableViewCell.m
 //  PubNubPersistence
 //
-//  Created by Jordan Zucker on 7/7/16.
+//  Created by Jordan Zucker on 9/27/16.
 //  Copyright © 2016 Jordan Zucker. All rights reserved.
 //
 
@@ -15,20 +15,6 @@
     return NSStringFromClass(self);
 }
 
-- (instancetype)initWithMessage:(PNPMessage *)message {
-    NSParameterAssert(message);
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[[self class] reuseIdentifier]];
-    if (self) {
-        self.textLabel.text = [NSString stringWithFormat:@"%@", message.message];
-        self.detailTextLabel.text = [NSString stringWithFormat:@"%@", @(message.timetoken)];
-    }
-    return self;
-}
-
-+ (instancetype)cellWithMessage:(PNPMessage *)message {
-    return [[self alloc] initWithMessage:message];
-}
-
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -38,6 +24,14 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)update:(NSManagedObject *)object {
+    NSParameterAssert([object isKindOfClass:[PNPMessage class]]);
+    PNPMessage *message = (PNPMessage *)object;
+    NSString *messageString = [[NSString alloc] initWithData:message.payload encoding:NSUTF8StringEncoding];
+    self.textLabel.text = messageString;
+    [self setNeedsLayout];
 }
 
 @end

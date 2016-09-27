@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Message" representedClassName=".PNPMessage" syncable="YES">
+        <attribute name="payload" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="subscribables" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Subscribable" inverseName="messages" inverseEntity="Subscribable" syncable="YES"/>
+        <relationship name="timetoken" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Timetoken" inverseName="messages" inverseEntity="Timetoken" syncable="YES"/>
+    </entity>
+    <entity name="Status" representedClassName=".PNPStatus" syncable="YES">
+        <attribute name="currentUUID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastStatusCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="subscribables" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Subscribable" inverseName="statuses" inverseEntity="Subscribable" syncable="YES"/>
+        <relationship name="timetoken" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Timetoken" inverseName="statuses" inverseEntity="Timetoken" syncable="YES"/>
+    </entity>
+    <entity name="Subscribable" representedClassName=".PNPSubscribable" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="messages" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="subscribables" inverseEntity="Message" syncable="YES"/>
+        <relationship name="statuses" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Status" inverseName="subscribables" inverseEntity="Status" syncable="YES"/>
+    </entity>
+    <entity name="Timetoken" representedClassName=".PNPTimetoken" syncable="YES">
+        <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="timetoken" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="timetoken" inverseEntity="Message" syncable="YES"/>
+        <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Status" inverseName="timetoken" inverseEntity="Status" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Timetoken" positionX="-45" positionY="0" width="128" height="105"/>
+        <element name="Message" positionX="-18" positionY="27" width="128" height="90"/>
+        <element name="Status" positionX="9" positionY="54" width="128" height="105"/>
+        <element name="Subscribable" positionX="36" positionY="99" width="128" height="120"/>
+    </elements>
+</model>
