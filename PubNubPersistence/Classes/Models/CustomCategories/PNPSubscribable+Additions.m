@@ -33,4 +33,8 @@
     return createdOrUpdatedSubscribable;
 }
 
+- (PNPSubscribableType)subscribableType {
+    return (PNPSubscribableType)self.type;
+}
+
 @end

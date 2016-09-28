@@ -18,4 +18,6 @@ typedef NS_ENUM(NSInteger, PNPSubscribableType) {
 
 + (instancetype)createOrUpdateSubscribable:(NSString *)subscribable type:(NSInteger)type inContext:(NSManagedObjectContext *)context;
 
+- (PNPSubscribableType)subscribableType;
+
 @end

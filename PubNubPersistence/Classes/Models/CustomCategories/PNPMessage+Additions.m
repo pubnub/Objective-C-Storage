@@ -34,6 +34,12 @@
     }
     PNPSubscribable *channel = [PNPSubscribable createOrUpdateSubscribable:message.data.channel type:PNPSubscribableTypeChannel inContext:context];
     [createdMessage addSubscribablesObject:channel];
+    /*
+    NSString *subscriptionMatch = message.data.subscription;
+    if (subscriptionMatch) {
+        PNPSubscribable *
+    }
+     */
     return createdMessage;
 }
 
