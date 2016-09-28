@@ -15,5 +15,6 @@
 + (instancetype)messageWithMessage:(PNMessageResult *)message inContext:(NSManagedObjectContext *)context;
 
 - (NSString *)messageString;
+- (NSString *)subscribablesString;
 
 @end

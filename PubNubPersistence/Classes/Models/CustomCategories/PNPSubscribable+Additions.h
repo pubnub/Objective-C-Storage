@@ -8,6 +8,14 @@
 
 #import "PNPSubscribable+CoreDataClass.h"
 
+typedef NS_ENUM(NSInteger, PNPSubscribableType) {
+    PNPSubscribableTypeUnknown = -1,
+    PNPSubscribableTypeChannel = 0,
+    PNPSubscribableTypeChannelGroup,
+};
+
 @interface PNPSubscribable (Additions)
+
++ (instancetype)createOrUpdateSubscribable:(NSString *)subscribable type:(NSInteger)type inContext:(NSManagedObjectContext *)context;
 
 @end

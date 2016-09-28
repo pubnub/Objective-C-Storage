@@ -9,6 +9,7 @@
 #import <PubNub/PubNub.h>
 #import "PNPMessage+Additions.h"
 #import "PNPTimetoken+Additions.h"
+#import "PNPSubscribable+Additions.h"
 
 @implementation PNPMessage (Additions)
 
@@ -31,11 +32,24 @@
     if (messageString) {
         createdMessage.payload = [messageString dataUsingEncoding:NSUTF8StringEncoding];
     }
+    PNPSubscribable *channel = [PNPSubscribable createOrUpdateSubscribable:message.data.channel type:PNPSubscribableTypeChannel inContext:context];
+    [createdMessage addSubscribablesObject:channel];
     return createdMessage;
 }
 
 - (NSString *)messageString {
     return [[NSString alloc] initWithData:self.payload encoding:NSUTF8StringEncoding];
+}
+
+- (NSString *)subscribablesString {
+    NSMutableString *buildingString = [@"" mutableCopy];
+    for (PNPSubscribable *subscribable in self.subscribables) {
+        if (buildingString.length) {
+            [buildingString appendString:@", "];
+        }
+        [buildingString appendString:subscribable.name];
+    }
+    return buildingString.copy;
 }
 
 @end
