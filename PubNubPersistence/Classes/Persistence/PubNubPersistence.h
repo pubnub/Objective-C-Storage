@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)saveContext;
 
+- (void)testHistory;
+
 @end
 
 NS_ASSUME_NONNULL_END

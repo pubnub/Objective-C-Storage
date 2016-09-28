@@ -24,6 +24,8 @@
     PubNubPersistence *persistence = appDelegate.persistence;
     
     self.currentStatus = [PNPStatus currentStatusInContext:persistence.persistentContainer.viewContext];
+    
+    [persistence testHistory];
 }
 
 - (void)didReceiveMemoryWarning {
