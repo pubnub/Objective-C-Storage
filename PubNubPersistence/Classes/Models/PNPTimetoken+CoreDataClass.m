@@ -11,4 +11,9 @@
 #import "PNPStatus+CoreDataClass.h"
 @implementation PNPTimetoken
 
+- (void)awakeFromInsert {
+    [super awakeFromInsert];
+    self.creationDate = [NSDate date];
+}
+
 @end

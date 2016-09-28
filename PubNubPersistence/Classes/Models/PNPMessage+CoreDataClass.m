@@ -15,9 +15,9 @@
 
 + (instancetype)messageWithMessage:(PNMessageResult *)message inContext:(NSManagedObjectContext *)context {
     PNPMessage *createdMessage = [[PNPMessage alloc] initWithContext:context];
-    PNPTimetoken *timetoken = [[PNPTimetoken alloc] initWithContext:context];
-    timetoken.timetoken = message.data.timetoken.unsignedLongLongValue;
-    createdMessage.timetoken = timetoken;
+    
+    PNPTimetoken *messageTimetoken = [PNPTimetoken createOrUpdate:message.data.timetoken inContext:context];
+    createdMessage.timetoken = messageTimetoken;
     id payload = message.data.message;
     NSString *messageString = nil;
     if ([payload isKindOfClass:[NSNumber class]]) {

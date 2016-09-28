@@ -8,12 +8,14 @@
 
 #import "PNPTimetoken+CoreDataClass.h"
 
+@class NSManagedObjectContext;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PNPTimetoken (CoreDataProperties)
 
 + (NSFetchRequest<PNPTimetoken *> *)fetchRequest;
++ (instancetype)createOrUpdate:(NSNumber *)timetoken inContext:(NSManagedObjectContext *)context;
 
 @property (nullable, nonatomic, copy) NSDate *creationDate;
 @property (nonatomic) int64_t timetoken;

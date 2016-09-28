@@ -38,7 +38,7 @@
 //    self.persistenceLayer = [PNPPersistenceLayer persistenceLayerWithConfiguration:persistenceConfig];
     PNPPersistenceConfiguration *config = [PNPPersistenceConfiguration persistenceConfigurationWithClient:self.client];
     self.persistence = [PubNubPersistence persistenceWithConfiguration:config];
-    [self.client subscribeToChannels:@[@"a"] withPresence:YES];
+    [self.client subscribeToChannels:@[@"c"] withPresence:YES];
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [self testRealm];

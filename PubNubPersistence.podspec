@@ -28,7 +28,7 @@ This is is a persistence layer for PubNub in an Objective-C environemnt for stor
   s.source           = { :git => 'https://github.com/pubnub/Objective-C-Storage.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/PubNub'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'PubNubPersistence/Classes/**/*'
   

@@ -12,6 +12,7 @@
 @interface PNPMessageTableViewCell : UITableViewCell
 
 + (NSString *)reuseIdentifier;
++ (CGFloat)cellHeight;
 
 - (void)update:(NSManagedObject *)object;
 

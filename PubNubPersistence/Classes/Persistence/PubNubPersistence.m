@@ -19,6 +19,7 @@
 @end
 
 @implementation PubNubPersistence
+@synthesize persistentContainer = _persistentContainer;
 
 - (instancetype)initWithConfiguration:(PNPPersistenceConfiguration *)configuration {
     NSParameterAssert(configuration);
@@ -26,6 +27,8 @@
     if (self) {
         _networkQueue = dispatch_queue_create("com.PubNubPersistence.NetworkingQueue", DISPATCH_QUEUE_CONCURRENT);
         _configuration = configuration.copy;
+        // need an excuse to start the persistent container immediately
+        [self _threadSafePersistentContainer];
         // this should never be nil
         [_configuration.client addListener:self];
     }
@@ -62,12 +65,11 @@
     });
 }
 
-@synthesize persistentContainer = _persistentContainer;
-
-- (NSPersistentContainer *)persistentContainer {
-    // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
+- (NSPersistentContainer *)_threadSafePersistentContainer {
+    // The persistent container for the framework. This implementation creates and returns a container, having loaded the store for the application to it.
     @synchronized (self) {
         if (_persistentContainer == nil) {
+            NSLog(@"!!!!!!!!!!!!!! Creating Persistent Container !!!!!!!!!!!!!!");
             
             NSBundle *podBundle = [NSBundle bundleForClass:self.classForCoder];
             NSURL *dataModelBundleURL = [podBundle URLForResource:@"DataModel" withExtension:@"bundle"];
@@ -100,6 +102,10 @@
         }
     }
     return _persistentContainer;
+}
+
+- (NSPersistentContainer *)persistentContainer {
+    return [self _threadSafePersistentContainer];
 }
 
 #pragma mark - Core Data Saving support
