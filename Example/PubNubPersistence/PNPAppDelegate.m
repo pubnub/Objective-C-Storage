@@ -24,8 +24,9 @@
     if (!_client) {
         PNConfiguration *config = [PNConfiguration configurationWithPublishKey:@"demo-36" subscribeKey:@"demo-36"];
         _client = [PubNub clientWithConfiguration:config];
-        _client.logger.enabled = YES;
-        [_client.logger setLogLevel:PNVerboseLogLevel];
+        _client.logger.enabled = NO;
+        //_client.logger.enabled = YES;
+        //[_client.logger setLogLevel:PNVerboseLogLevel];
     }
     return _client;
 }
@@ -39,7 +40,7 @@
     PNPPersistenceConfiguration *config = [PNPPersistenceConfiguration persistenceConfigurationWithClient:self.client];
     self.persistence = [PubNubPersistence persistenceWithConfiguration:config];
     [self.client subscribeToChannels:@[@"c"] withPresence:YES];
-    
+    /*
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.client unsubscribeFromAll];
         
@@ -52,6 +53,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.client unsubscribeFromAll];
     });
+     */
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [self testRealm];

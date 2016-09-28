@@ -58,6 +58,8 @@
     dispatch_async(self.networkQueue, ^{
         // probably don't need this, just in case
         [self.persistentContainer performBackgroundTask:^(NSManagedObjectContext * _Nonnull context) {
+#warning this merge policy needs to be set, convenience method would be helpful
+            context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
             PNPMessage *createdMessage = [PNPStatus createOrUpdate:status inContext:context];
             NSError *saveError;
             [context save:&saveError];
@@ -67,13 +69,28 @@
 }
 
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
+    NSLog(@"receive message %@", message.debugDescription);
     dispatch_async(self.networkQueue, ^{
         // probably don't need this, just in case
         [self.persistentContainer performBackgroundTask:^(NSManagedObjectContext * _Nonnull context) {
+            NSLog(@"add message %@", message.debugDescription);
+#warning this merge policy needs to be set, convenience method would be helpful
+            context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
             PNPMessage *createdMessage = [PNPMessage messageWithMessage:message inContext:context];
             NSError *saveError;
             [context save:&saveError];
             NSAssert(!saveError, @"%@", saveError.debugDescription);
+            if (saveError) {
+                NSDictionary *userInfo = [saveError userInfo];
+                if (userInfo[NSPersistentStoreSaveConflictsErrorKey]) {
+                    NSArray<NSMergeConflict *> *conflicts = userInfo[NSPersistentStoreSaveConflictsErrorKey];
+                    for (NSMergeConflict *conflict in conflicts) {
+                        NSLog(@"conflict: %@", conflict);
+                        PNPSubscribable *subscribable = (PNPSubscribable *)conflict.sourceObject;
+                        NSLog(@"subscribable: %@", subscribable);
+                    }
+                }
+            }
         }];
     });
 }
