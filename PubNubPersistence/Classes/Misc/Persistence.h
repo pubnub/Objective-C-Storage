@@ -13,6 +13,10 @@
 #import "PNPPersistenceConfiguration.h"
 #import "PubNubPersistence.h"
 
-#import "PNPMessage+CoreDataProperties.h"
+#import "PNPMessage+Additions.h"
+#import "PNPTimetoken+Additions.h"
+#import "PNPSubscribable+Additions.h"
+#import "PNPStatus+Additions.h"
+
 
 #endif /* Persistence_h */

@@ -9,7 +9,8 @@
 #import <PubNub/PubNub.h>
 #import "PNPPersistenceConfiguration.h"
 #import "PubNubPersistence.h"
-#import "PNPMessage+CoreDataClass.h"
+#import "PNPMessage+Additions.h"
+#import "PNPStatus+Additions.h"
 
 @interface PubNubPersistence () <PNObjectEventListener>
 @property (nonatomic, strong, readwrite) PNPPersistenceConfiguration *configuration;
@@ -53,6 +54,18 @@
 
 #pragma mark - PNObjectEventListener
 
+- (void)client:(PubNub *)client didReceiveStatus:(PNStatus *)status {
+    dispatch_async(self.networkQueue, ^{
+        // probably don't need this, just in case
+        [self.persistentContainer performBackgroundTask:^(NSManagedObjectContext * _Nonnull context) {
+            PNPMessage *createdMessage = [PNPStatus createOrUpdate:status inContext:context];
+            NSError *saveError;
+            [context save:&saveError];
+            NSAssert(!saveError, @"%@", saveError.debugDescription);
+        }];
+    });
+}
+
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
     dispatch_async(self.networkQueue, ^{
         // probably don't need this, just in case
@@ -64,6 +77,8 @@
         }];
     });
 }
+
+#pragma mark - CoreData
 
 - (NSPersistentContainer *)_threadSafePersistentContainer {
     // The persistent container for the framework. This implementation creates and returns a container, having loaded the store for the application to it.

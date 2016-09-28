@@ -1,18 +1,14 @@
 //
-//  PNPTimetoken+CoreDataProperties.m
+//  PNPTimetoken+Additions.m
 //  Pods
 //
-//  Created by Jordan Zucker on 9/27/16.
+//  Created by Jordan Zucker on 9/28/16.
 //
 //
 
-#import "PNPTimetoken+CoreDataProperties.h"
+#import "PNPTimetoken+Additions.h"
 
-@implementation PNPTimetoken (CoreDataProperties)
-
-+ (NSFetchRequest<PNPTimetoken *> *)fetchRequest {
-	return [[NSFetchRequest alloc] initWithEntityName:@"Timetoken"];
-}
+@implementation PNPTimetoken (Additions)
 
 + (instancetype)createOrUpdate:(NSNumber *)timetoken inContext:(NSManagedObjectContext *)context {
     NSParameterAssert(timetoken);
@@ -35,9 +31,8 @@
     return createdOrUpdatedTimetoken;
 }
 
-@dynamic creationDate;
-@dynamic timetoken;
-@dynamic statuses;
-@dynamic messages;
+- (NSString *)timetokenString {
+    return [NSString stringWithFormat:@"%@", @(self.timetoken)];
+}
 
 @end

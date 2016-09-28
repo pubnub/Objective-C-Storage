@@ -11,4 +11,9 @@
 #import "PNPStatus+CoreDataClass.h"
 @implementation PNPSubscribable
 
+- (void)awakeFromInsert {
+    [super awakeFromInsert];
+    self.creationDate = [NSDate date];
+}
+
 @end

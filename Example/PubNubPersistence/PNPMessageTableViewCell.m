@@ -33,7 +33,7 @@
 - (void)update:(NSManagedObject *)object {
     NSParameterAssert([object isKindOfClass:[PNPMessage class]]);
     PNPMessage *message = (PNPMessage *)object;
-    NSString *messageString = [[NSString alloc] initWithData:message.payload encoding:NSUTF8StringEncoding];
+    NSString *messageString = [message messageString];
     self.textLabel.numberOfLines = 3;
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.text = messageString;

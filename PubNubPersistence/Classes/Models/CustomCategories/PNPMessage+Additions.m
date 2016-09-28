@@ -1,17 +1,16 @@
 //
-//  PNPMessage+CoreDataClass.m
+//  PNPMessage+Additions.m
 //  Pods
 //
-//  Created by Jordan Zucker on 9/27/16.
+//  Created by Jordan Zucker on 9/28/16.
 //
 //
 
 #import <PubNub/PubNub.h>
-#import "PNPMessage+CoreDataClass.h"
-#import "PNPSubscribable+CoreDataClass.h"
-#import "PNPTimetoken+CoreDataClass.h"
+#import "PNPMessage+Additions.h"
+#import "PNPTimetoken+Additions.h"
 
-@implementation PNPMessage
+@implementation PNPMessage (Additions)
 
 + (instancetype)messageWithMessage:(PNMessageResult *)message inContext:(NSManagedObjectContext *)context {
     PNPMessage *createdMessage = [[PNPMessage alloc] initWithContext:context];
@@ -35,9 +34,8 @@
     return createdMessage;
 }
 
-- (void)awakeFromInsert {
-    [super awakeFromInsert];
-    self.creationDate = [NSDate date];
+- (NSString *)messageString {
+    return [[NSString alloc] initWithData:self.payload encoding:NSUTF8StringEncoding];
 }
 
 @end

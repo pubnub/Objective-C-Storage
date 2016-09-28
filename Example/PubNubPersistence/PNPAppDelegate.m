@@ -40,6 +40,19 @@
     self.persistence = [PubNubPersistence persistenceWithConfiguration:config];
     [self.client subscribeToChannels:@[@"c"] withPresence:YES];
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.client unsubscribeFromAll];
+        
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.client subscribeToChannels:@[@"c"] withPresence:YES];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.client unsubscribeFromAll];
+    });
+    
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [self testRealm];
 //    });

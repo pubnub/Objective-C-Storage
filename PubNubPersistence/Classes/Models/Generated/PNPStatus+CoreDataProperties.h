@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<PNPStatus *> *)fetchRequest;
 
+@property (nonatomic, copy) NSDate *creationDate;
 @property (nonatomic) int16_t lastStatusCode;
 @property (nullable, nonatomic, copy) NSString *currentUUID;
 @property (nullable, nonatomic, retain) PNPTimetoken *timetoken;

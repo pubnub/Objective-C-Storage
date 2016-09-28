@@ -10,13 +10,10 @@
 #import <CoreData/CoreData.h>
 
 @class PNPSubscribable, PNPTimetoken;
-@class PNMessageResult;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PNPMessage : NSManagedObject
-
-+ (instancetype)messageWithMessage:(PNMessageResult *)message inContext:(NSManagedObjectContext *)context;
 
 @end
 

@@ -37,11 +37,43 @@
                     </tabBar>
                     <connections>
                         <segue destination="d1m-qN-OWe" kind="relationship" relationship="viewControllers" id="HGN-Lr-pC7"/>
+                        <segue destination="BVe-qg-2pY" kind="relationship" relationship="viewControllers" id="0O2-Vn-MHX"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22m-cm-ePH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="133" y="1095"/>
+        </scene>
+        <!--Status-->
+        <scene sceneID="37i-tP-azN">
+            <objects>
+                <viewController id="BVe-qg-2pY" customClass="PNPStatusViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qBg-dK-b5g"/>
+                        <viewControllerLayoutGuide type="bottom" id="lWx-h9-vlN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SQ7-bM-fGr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Timetoken" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFL-LG-klZ">
+                                <frame key="frameInset" minX="54" minY="58" width="198" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Status" id="Kgx-Vh-d06"/>
+                    <connections>
+                        <outlet property="currentTimetokenLabel" destination="UFL-LG-klZ" id="lDM-jH-5n6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gtI-ga-5fi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1052" y="1373.1634182908547"/>
         </scene>
     </scenes>
 </document>
