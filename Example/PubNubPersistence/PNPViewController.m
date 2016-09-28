@@ -23,10 +23,12 @@
     if (!_fetchedResultsController) {
         NSFetchRequest *request = [PNPMessage fetchRequest];
         NSSortDescriptor *creationDateSort = [NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES];
+        PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
+        PubNubPersistence *persistence = appDelegate.persistence;
         request.sortDescriptors = @[
                                     creationDateSort,
                                     ];
-        _fetchedResultsController = [[NSFetchedResultsController alloc] init];
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:persistence.persistentContainer.viewContext sectionNameKeyPath:nil cacheName:nil];
         _fetchedResultsController.delegate = self;
     }
     return _fetchedResultsController;

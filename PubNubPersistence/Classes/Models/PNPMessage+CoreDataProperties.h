@@ -8,18 +8,26 @@
 
 #import "PNPMessage+CoreDataClass.h"
 
-@class PNMessageResult;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PNPMessage (CoreDataProperties)
 
 + (NSFetchRequest<PNPMessage *> *)fetchRequest;
-+ (instancetype)messageWithMessage:(PNMessageResult *)message inContext:(NSManagedObjectContext *)moc;
 
 @property (nullable, nonatomic, retain) NSData *payload;
-@property (nonatomic, retain) PNPTimetoken *timetoken;
-@property (nullable, nonatomic, retain) PNPSubscribable *subscribables;
+@property (nullable, nonatomic, copy) NSDate *creationDate;
+@property (nullable, nonatomic, retain) PNPTimetoken *timetoken;
+@property (nullable, nonatomic, retain) NSSet<PNPSubscribable *> *subscribables;
+
+@end
+
+@interface PNPMessage (CoreDataGeneratedAccessors)
+
+- (void)addSubscribablesObject:(PNPSubscribable *)value;
+- (void)removeSubscribablesObject:(PNPSubscribable *)value;
+- (void)addSubscribables:(NSSet<PNPSubscribable *> *)values;
+- (void)removeSubscribables:(NSSet<PNPSubscribable *> *)values;
 
 @end
 

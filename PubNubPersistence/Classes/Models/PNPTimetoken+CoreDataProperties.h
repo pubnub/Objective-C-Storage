@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<PNPTimetoken *> *)fetchRequest;
 
-@property (nonatomic, copy) NSDate *creationDate;
+@property (nullable, nonatomic, copy) NSDate *creationDate;
 @property (nonatomic) int64_t timetoken;
 @property (nullable, nonatomic, retain) NSSet<PNPStatus *> *statuses;
 @property (nullable, nonatomic, retain) NSSet<PNPMessage *> *messages;

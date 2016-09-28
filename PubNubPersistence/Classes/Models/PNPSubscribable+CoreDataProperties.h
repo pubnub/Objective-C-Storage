@@ -15,11 +15,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<PNPSubscribable *> *)fetchRequest;
 
-@property (nonatomic, copy) NSDate *creationDate;
-@property (nonatomic, copy) NSString *name;
+@property (nullable, nonatomic, copy) NSDate *creationDate;
+@property (nullable, nonatomic, copy) NSString *name;
 @property (nonatomic) int16_t type;
-@property (nullable, nonatomic, retain) PNPMessage *messages;
-@property (nullable, nonatomic, retain) PNPStatus *statuses;
+@property (nullable, nonatomic, retain) NSSet<PNPMessage *> *messages;
+@property (nullable, nonatomic, retain) NSSet<PNPStatus *> *statuses;
+
+@end
+
+@interface PNPSubscribable (CoreDataGeneratedAccessors)
+
+- (void)addMessagesObject:(PNPMessage *)value;
+- (void)removeMessagesObject:(PNPMessage *)value;
+- (void)addMessages:(NSSet<PNPMessage *> *)values;
+- (void)removeMessages:(NSSet<PNPMessage *> *)values;
+
+- (void)addStatusesObject:(PNPStatus *)value;
+- (void)removeStatusesObject:(PNPStatus *)value;
+- (void)addStatuses:(NSSet<PNPStatus *> *)values;
+- (void)removeStatuses:(NSSet<PNPStatus *> *)values;
 
 @end
 
