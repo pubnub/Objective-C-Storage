@@ -12,6 +12,7 @@
 
 @interface PNPStatusViewController ()
 @property (nonatomic, weak) IBOutlet UILabel *currentTimetokenLabel;
+@property (nonatomic, weak) IBOutlet UIButton *historyButton;
 @property (nonatomic, strong) PNPStatus *currentStatus;
 @end
 
@@ -25,7 +26,9 @@
     
     self.currentStatus = [PNPStatus currentStatusInContext:persistence.persistentContainer.viewContext];
     
-    [persistence testHistory];
+    [self.historyButton addTarget:self action:@selector(historyButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view setNeedsLayout];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +38,23 @@
 
 - (void)dealloc {
     self.currentStatus = nil;
+}
+
+#pragma mark - Actions
+
+- (void)historyButtonTapped:(UIButton *)sender {
+    PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
+    NSNumber *start = @([[NSDate date] timeIntervalSince1970]);
+    
+    NSNumber *end = @([[NSDate dateWithTimeIntervalSince1970:1000] timeIntervalSince1970]);
+    
+    PubNubPersistence *persistence = appDelegate.persistence;
+    [persistence historyForChannel:@"a" start:start end:end withCompletion:^(NSArray<NSManagedObjectID *> * _Nullable messages, NSError * _Nullable error) {
+        NSLog(@"messages: %@", messages);
+        if (error) {
+            NSLog(@"error: %@", error.localizedDescription);
+        }
+    }];
 }
 
 #pragma mark - KVO Getters

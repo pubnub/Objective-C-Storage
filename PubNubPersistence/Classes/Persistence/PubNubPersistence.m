@@ -52,9 +52,35 @@
     return self.configuration.client;
 }
 
+#pragma mark - Methods
+
+- (void)performBackgroundTaskAndSave:(void (^)(NSManagedObjectContext * _Nonnull))block {
+    [self performBackgroundTaskAndSave:block withCompletion:nil];
+}
+
+- (void)performBackgroundTaskAndSave:(void (^)(NSManagedObjectContext *))block withCompletion:(nullable void (^)(NSManagedObjectContext *, NSError * _Nullable))completionBlock {
+    dispatch_async(self.networkQueue, ^{
+        // probably don't need this, just in case
+        [self.persistentContainer performBackgroundTask:^(NSManagedObjectContext * _Nonnull context) {
+#warning this merge policy needs to be set, convenience method would be helpful
+            context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+            block(context);
+#warning should we check [context hasChanges] before saving?
+            NSError *saveError;
+            [context save:&saveError];
+            if (completionBlock) {
+                completionBlock(context, saveError);
+#warning probably want to remove this
+                NSAssert(!saveError, @"Save error: %@", saveError.localizedDescription);
+            }
+        }];
+    });
+}
+
 #pragma mark - PNObjectEventListener
 
 - (void)client:(PubNub *)client didReceiveStatus:(PNStatus *)status {
+    /*
     dispatch_async(self.networkQueue, ^{
         // probably don't need this, just in case
         [self.persistentContainer performBackgroundTask:^(NSManagedObjectContext * _Nonnull context) {
@@ -66,10 +92,18 @@
             NSAssert(!saveError, @"%@", saveError.debugDescription);
         }];
     });
+     */
+    [self performBackgroundTaskAndSave:^void(NSManagedObjectContext * _Nonnull context) {
+        PNPStatus *createdStatus = [PNPStatus createOrUpdate:status inContext:context];
+    }];
 }
 
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
-    NSLog(@"receive message %@", message.debugDescription);
+    //NSLog(@"receive message %@", message.debugDescription);
+    [self performBackgroundTaskAndSave:^(NSManagedObjectContext * _Nonnull context) {
+        PNPMessage *createdMessage = [PNPMessage messageWithMessage:message inContext:context];
+    }];
+    /*
     dispatch_async(self.networkQueue, ^{
         // probably don't need this, just in case
         [self.persistentContainer performBackgroundTask:^(NSManagedObjectContext * _Nonnull context) {
@@ -93,6 +127,7 @@
             }
         }];
     });
+     */
 }
 
 #pragma mark - CoreData
@@ -154,6 +189,48 @@
 }
 
 #pragma mark - History
+
+- (void)historyForChannel:(NSString *)channel start:(NSNumber *)startDate end:(NSNumber *)endDate withCompletion:(PNPHistoryCompletionBlock)block {
+    [self.client historyForChannel:channel start:startDate end:endDate includeTimeToken:YES withCompletion:^(PNHistoryResult * _Nullable result, PNErrorStatus * _Nullable status) {
+        __block NSMutableArray<NSManagedObjectID *> *savedMessages = [NSMutableArray array];
+        if (status) {
+            return;
+        }
+        [self performBackgroundTaskAndSave:^(NSManagedObjectContext * _Nonnull context) {
+            for (NSDictionary *historyMessage in result.data.messages) {
+                NSLog(@"message: %@", historyMessage);
+                NSNumber *messageTimetoken = (NSNumber *)historyMessage[@"timetoken"];
+                id messagePayload = historyMessage[@"message"];
+#warning need to fix this up
+                //PNPMessage *createdMessage = [PNPMessage messageWithMessage:message inContext:context];
+                PNPMessage *createdMessage = [PNPMessage messageWithChannel:channel timetoken:messageTimetoken message:messagePayload inContext:context];
+                [savedMessages addObject:createdMessage.objectID];
+            }
+        } withCompletion:^(NSManagedObjectContext * _Nonnull context, NSError * _Nullable error) {
+            if (block) {
+                // first check if there is a status
+                if (status) {
+                    NSError *historyError = [NSError errorWithDomain:@"PubNubPersistence" code:100 userInfo:@{
+                                                                                                              @"description": status.stringifiedCategory,
+                                                                                                              }];
+                    block(nil, error);
+                    return;
+                }
+                // then check for a save error
+                if (error) {
+                    if (savedMessages.count) {
+                        block(savedMessages.copy, error);
+                    } else {
+                        block(nil, error);
+                    }
+                    return;
+                }
+                // else just return
+                block(savedMessages.copy, nil);
+            }
+        }];
+    }];
+}
 
 - (void)testHistory {
 #warning need to include a time token

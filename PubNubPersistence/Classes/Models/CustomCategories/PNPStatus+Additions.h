@@ -10,6 +10,8 @@
 
 @class PNStatus;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface PNPStatus (Additions)
 
 + (instancetype)currentStatusInContext:(NSManagedObjectContext *)context;
@@ -17,3 +19,5 @@
 + (instancetype)createOrUpdate:(PNStatus *)status inContext:(NSManagedObjectContext *)context;
 
 @end
+
+NS_ASSUME_NONNULL_END

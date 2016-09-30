@@ -63,12 +63,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2A-8u-aNR">
+                                <frame key="frameInset" minX="70" minY="144" width="50" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="History"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Status" id="Kgx-Vh-d06"/>
                     <connections>
                         <outlet property="currentTimetokenLabel" destination="UFL-LG-klZ" id="lDM-jH-5n6"/>
+                        <outlet property="historyButton" destination="W2A-8u-aNR" id="S6H-ck-PvL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gtI-ga-5fi" userLabel="First Responder" sceneMemberID="firstResponder"/>

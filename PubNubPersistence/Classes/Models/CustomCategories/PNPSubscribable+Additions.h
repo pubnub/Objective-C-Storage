@@ -14,6 +14,8 @@ typedef NS_ENUM(NSInteger, PNPSubscribableType) {
     PNPSubscribableTypeChannelGroup,
 };
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface PNPSubscribable (Additions)
 
 + (instancetype)createOrUpdateSubscribable:(NSString *)subscribable type:(NSInteger)type inContext:(NSManagedObjectContext *)context;
@@ -21,3 +23,5 @@ typedef NS_ENUM(NSInteger, PNPSubscribableType) {
 - (PNPSubscribableType)subscribableType;
 
 @end
+
+NS_ASSUME_NONNULL_END

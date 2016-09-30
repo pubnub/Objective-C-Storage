@@ -10,11 +10,16 @@
 
 @class PNMessageResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface PNPMessage (Additions)
 
 + (instancetype)messageWithMessage:(PNMessageResult *)message inContext:(NSManagedObjectContext *)context;
++ (instancetype)messageWithChannel:(NSString *)channel timetoken:(NSNumber *)timetoken message:(nullable id)message inContext:(NSManagedObjectContext *)context;
 
 - (NSString *)messageString;
 - (NSString *)subscribablesString;
 
 @end
+
+NS_ASSUME_NONNULL_END
