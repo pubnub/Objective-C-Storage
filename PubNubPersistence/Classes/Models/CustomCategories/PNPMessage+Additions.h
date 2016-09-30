@@ -9,6 +9,7 @@
 #import "PNPMessage+CoreDataClass.h"
 
 @class PNMessageResult;
+@class PNPTimetoken;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)messageWithMessage:(PNMessageResult *)message inContext:(NSManagedObjectContext *)context;
 + (instancetype)messageWithChannel:(NSString *)channel timetoken:(NSNumber *)timetoken message:(nullable id)message inContext:(NSManagedObjectContext *)context;
++ (instancetype)messageWithFetchedChannel:(PNPSubscribable *)channel timetoken:(NSNumber *)timetoken message:(nullable id)message inContext:(NSManagedObjectContext *)context;
 
 - (NSString *)messageString;
 - (NSString *)subscribablesString;

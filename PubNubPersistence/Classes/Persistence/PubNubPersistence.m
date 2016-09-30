@@ -11,6 +11,7 @@
 #import "PubNubPersistence.h"
 #import "PNPMessage+Additions.h"
 #import "PNPStatus+Additions.h"
+#import "PNPSubscribable+Additions.h"
 
 @interface PubNubPersistence () <PNObjectEventListener>
 @property (nonatomic, strong, readwrite) PNPPersistenceConfiguration *configuration;
@@ -72,6 +73,19 @@
                 completionBlock(context, saveError);
 #warning probably want to remove this
                 NSAssert(!saveError, @"Save error: %@", saveError.localizedDescription);
+                /*
+                if (saveError) {
+                    NSDictionary *userInfo = [saveError userInfo];
+                    if (userInfo[NSPersistentStoreSaveConflictsErrorKey]) {
+                        NSArray<NSMergeConflict *> *conflicts = userInfo[NSPersistentStoreSaveConflictsErrorKey];
+                        for (NSMergeConflict *conflict in conflicts) {
+                            NSLog(@"conflict: %@", conflict);
+                            PNPSubscribable *subscribable = (PNPSubscribable *)conflict.sourceObject;
+                            NSLog(@"subscribable: %@", subscribable);
+                        }
+                    }
+                }
+                 */
             }
         }];
     });
@@ -80,54 +94,15 @@
 #pragma mark - PNObjectEventListener
 
 - (void)client:(PubNub *)client didReceiveStatus:(PNStatus *)status {
-    /*
-    dispatch_async(self.networkQueue, ^{
-        // probably don't need this, just in case
-        [self.persistentContainer performBackgroundTask:^(NSManagedObjectContext * _Nonnull context) {
-#warning this merge policy needs to be set, convenience method would be helpful
-            context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
-            PNPMessage *createdMessage = [PNPStatus createOrUpdate:status inContext:context];
-            NSError *saveError;
-            [context save:&saveError];
-            NSAssert(!saveError, @"%@", saveError.debugDescription);
-        }];
-    });
-     */
     [self performBackgroundTaskAndSave:^void(NSManagedObjectContext * _Nonnull context) {
         PNPStatus *createdStatus = [PNPStatus createOrUpdate:status inContext:context];
     }];
 }
 
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
-    //NSLog(@"receive message %@", message.debugDescription);
     [self performBackgroundTaskAndSave:^(NSManagedObjectContext * _Nonnull context) {
         PNPMessage *createdMessage = [PNPMessage messageWithMessage:message inContext:context];
     }];
-    /*
-    dispatch_async(self.networkQueue, ^{
-        // probably don't need this, just in case
-        [self.persistentContainer performBackgroundTask:^(NSManagedObjectContext * _Nonnull context) {
-            NSLog(@"add message %@", message.debugDescription);
-#warning this merge policy needs to be set, convenience method would be helpful
-            context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
-            PNPMessage *createdMessage = [PNPMessage messageWithMessage:message inContext:context];
-            NSError *saveError;
-            [context save:&saveError];
-            NSAssert(!saveError, @"%@", saveError.debugDescription);
-            if (saveError) {
-                NSDictionary *userInfo = [saveError userInfo];
-                if (userInfo[NSPersistentStoreSaveConflictsErrorKey]) {
-                    NSArray<NSMergeConflict *> *conflicts = userInfo[NSPersistentStoreSaveConflictsErrorKey];
-                    for (NSMergeConflict *conflict in conflicts) {
-                        NSLog(@"conflict: %@", conflict);
-                        PNPSubscribable *subscribable = (PNPSubscribable *)conflict.sourceObject;
-                        NSLog(@"subscribable: %@", subscribable);
-                    }
-                }
-            }
-        }];
-    });
-     */
 }
 
 #pragma mark - CoreData
@@ -197,14 +172,16 @@
             return;
         }
         [self performBackgroundTaskAndSave:^(NSManagedObjectContext * _Nonnull context) {
+            PNPSubscribable *fetchedChannel = [PNPSubscribable createOrUpdateChannel:channel inContext:context];
             for (NSDictionary *historyMessage in result.data.messages) {
                 NSLog(@"message: %@", historyMessage);
                 NSNumber *messageTimetoken = (NSNumber *)historyMessage[@"timetoken"];
-                id messagePayload = historyMessage[@"message"];
-#warning need to fix this up
-                //PNPMessage *createdMessage = [PNPMessage messageWithMessage:message inContext:context];
-                PNPMessage *createdMessage = [PNPMessage messageWithChannel:channel timetoken:messageTimetoken message:messagePayload inContext:context];
-                [savedMessages addObject:createdMessage.objectID];
+                id messagePayload = nil;
+                if (historyMessage[@"message"]) {
+                    messagePayload = historyMessage[@"message"];
+                    PNPMessage *historyMessage = [PNPMessage messageWithFetchedChannel:fetchedChannel timetoken:messageTimetoken message:messagePayload inContext:context];
+                    [savedMessages addObject:historyMessage.objectID];
+                }
             }
         } withCompletion:^(NSManagedObjectContext * _Nonnull context, NSError * _Nullable error) {
             if (block) {
@@ -229,37 +206,6 @@
                 block(savedMessages.copy, nil);
             }
         }];
-    }];
-}
-
-- (void)testHistory {
-#warning need to include a time token
-    [self.client historyForChannel:@"a" withCompletion:^(PNHistoryResult * _Nullable result, PNErrorStatus * _Nullable status) {
-        dispatch_async(self.networkQueue, ^{
-            // probably don't need this, just in case
-            [self.persistentContainer performBackgroundTask:^(NSManagedObjectContext * _Nonnull context) {
-#warning this merge policy needs to be set, convenience method would be helpful
-                context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
-                for (id message in result.data.messages) {
-                    NSLog(@"message: %@", message);
-                    PNPMessage *createdMessage = [PNPMessage messageWithMessage:message inContext:context];
-                }
-                NSError *saveError;
-                [context save:&saveError];
-                NSAssert(!saveError, @"%@", saveError.debugDescription);
-                if (saveError) {
-                    NSDictionary *userInfo = [saveError userInfo];
-                    if (userInfo[NSPersistentStoreSaveConflictsErrorKey]) {
-                        NSArray<NSMergeConflict *> *conflicts = userInfo[NSPersistentStoreSaveConflictsErrorKey];
-                        for (NSMergeConflict *conflict in conflicts) {
-                            NSLog(@"conflict: %@", conflict);
-                            PNPSubscribable *subscribable = (PNPSubscribable *)conflict.sourceObject;
-                            NSLog(@"subscribable: %@", subscribable);
-                        }
-                    }
-                }
-            }];
-        });
     }];
 }
 

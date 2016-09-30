@@ -18,7 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PNPSubscribable (Additions)
 
-+ (instancetype)createOrUpdateSubscribable:(NSString *)subscribable type:(NSInteger)type inContext:(NSManagedObjectContext *)context;
++ (instancetype)createOrUpdateSubscribable:(NSString *)subscribable type:(PNPSubscribableType)type inContext:(NSManagedObjectContext *)context;
+
++ (instancetype)createOrUpdateChannel:(NSString *)name inContext:(NSManagedObjectContext *)context;
 
 - (PNPSubscribableType)subscribableType;
 

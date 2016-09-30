@@ -10,7 +10,7 @@
 
 @implementation PNPSubscribable (Additions)
 
-+ (instancetype)createOrUpdateSubscribable:(NSString *)subscribable type:(NSInteger)type inContext:(NSManagedObjectContext *)context {
++ (instancetype)createOrUpdateSubscribable:(NSString *)subscribable type:(PNPSubscribableType)type inContext:(NSManagedObjectContext *)context {
     NSParameterAssert(subscribable);
     //NSParameterAssert(type);
     NSParameterAssert(context);
@@ -31,6 +31,10 @@
         }
     }];
     return createdOrUpdatedSubscribable;
+}
+
++ (instancetype)createOrUpdateChannel:(NSString *)name inContext:(NSManagedObjectContext *)context {
+    return [self createOrUpdateSubscribable:name type:PNPSubscribableTypeChannel inContext:context];
 }
 
 - (PNPSubscribableType)subscribableType {

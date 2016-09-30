@@ -2,9 +2,9 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Message" representedClassName="PNPMessage" syncable="YES">
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
-        <attribute name="payload" optional="YES" attributeType="Binary" syncable="YES"/>
-        <relationship name="subscribables" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subscribable" inverseName="messages" inverseEntity="Subscribable" syncable="YES"/>
-        <relationship name="timetoken" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Timetoken" inverseName="messages" inverseEntity="Timetoken" syncable="YES"/>
+        <attribute name="payload" attributeType="Binary" syncable="YES"/>
+        <relationship name="subscribables" toMany="YES" deletionRule="Nullify" destinationEntity="Subscribable" inverseName="messages" inverseEntity="Subscribable" syncable="YES"/>
+        <relationship name="timetoken" maxCount="1" deletionRule="Nullify" destinationEntity="Timetoken" inverseName="messages" inverseEntity="Timetoken" syncable="YES"/>
     </entity>
     <entity name="Status" representedClassName="PNPStatus" syncable="YES">
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>

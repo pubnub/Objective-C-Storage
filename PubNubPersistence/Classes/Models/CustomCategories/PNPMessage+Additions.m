@@ -15,32 +15,16 @@
 
 + (instancetype)messageWithMessage:(PNMessageResult *)message inContext:(NSManagedObjectContext *)context {
     /*
-    PNPMessage *createdMessage = [[PNPMessage alloc] initWithContext:context];
-    
-    PNPTimetoken *messageTimetoken = [PNPTimetoken createOrUpdate:message.data.timetoken inContext:context];
-    createdMessage.timetoken = messageTimetoken;
-    id payload = message.data.message;
-    NSString *messageString = nil;
-    if ([payload isKindOfClass:[NSNumber class]]) {
-        NSNumber *numberPayload = (NSNumber *)payload;
-        messageString = [NSString stringWithFormat:@"%@", numberPayload];
-    } else if ([payload isKindOfClass:[NSString class]]) {
-        messageString = (NSString *)payload;
-    } else if ([payload isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *dictionaryPayload = (NSDictionary *)payload;
-        messageString = dictionaryPayload.debugDescription;
-    }
-    if (messageString) {
-        createdMessage.payload = [messageString dataUsingEncoding:NSUTF8StringEncoding];
-    }
-    PNPSubscribable *channel = [PNPSubscribable createOrUpdateSubscribable:message.data.channel type:PNPSubscribableTypeChannel inContext:context];
-    [createdMessage addSubscribablesObject:channel];
-    return createdMessage;
+     NSString *subscriptionMatch = message.data.subscription;
+     if (subscriptionMatch) {
+     PNPSubscribable *
+     }
      */
     return [self messageWithChannel:message.data.channel timetoken:message.data.timetoken message:message.data.message inContext:context];
 }
 
-+ (instancetype)messageWithChannel:(NSString *)channel timetoken:(NSNumber *)timetoken message:(id)message inContext:(NSManagedObjectContext *)context {
++ (instancetype)messageWithFetchedChannel:(PNPSubscribable *)channel timetoken:(NSNumber *)timetoken message:(id)message inContext:(NSManagedObjectContext *)context {
+    NSParameterAssert(channel.subscribableType == PNPSubscribableTypeChannel);
     PNPMessage *createdMessage = [[PNPMessage alloc] initWithContext:context];
     
     PNPTimetoken *messageTimetoken = [PNPTimetoken createOrUpdate:timetoken inContext:context];
@@ -59,15 +43,17 @@
     if (messageString) {
         createdMessage.payload = [messageString dataUsingEncoding:NSUTF8StringEncoding];
     }
-    PNPSubscribable *messageChannel = [PNPSubscribable createOrUpdateSubscribable:channel type:PNPSubscribableTypeChannel inContext:context];
-    [createdMessage addSubscribablesObject:messageChannel];
-    /*
-     NSString *subscriptionMatch = message.data.subscription;
-     if (subscriptionMatch) {
-     PNPSubscribable *
-     }
-     */
+    
+    [createdMessage addSubscribablesObject:channel];
+    
     return createdMessage;
+}
+
++ (instancetype)messageWithChannel:(NSString *)channel timetoken:(NSNumber *)timetoken message:(id)message inContext:(NSManagedObjectContext *)context {
+    PNPMessage *createdMessage = [[PNPMessage alloc] initWithContext:context];
+    
+    PNPSubscribable *fetchedChannel = [PNPSubscribable createOrUpdateChannel:channel inContext:context];
+    return [self messageWithFetchedChannel:fetchedChannel timetoken:timetoken message:message inContext:context];
 }
 
 - (NSString *)messageString {
