@@ -17,6 +17,7 @@
 #import "PNPTimetoken+Additions.h"
 #import "PNPSubscribable+Additions.h"
 #import "PNPStatus+Additions.h"
+#import "PNPMessageSource+Additions.h"
 
 
 #endif /* Persistence_h */

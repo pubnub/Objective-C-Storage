@@ -2,7 +2,7 @@
 //  PNPMessage+CoreDataProperties.m
 //  Pods
 //
-//  Created by Jordan Zucker on 9/27/16.
+//  Created by Jordan Zucker on 10/1/16.
 //
 //
 
@@ -14,9 +14,10 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"Message"];
 }
 
-@dynamic payload;
 @dynamic creationDate;
-@dynamic timetoken;
+@dynamic payload;
 @dynamic subscribables;
+@dynamic timetoken;
+@dynamic sources;
 
 @end

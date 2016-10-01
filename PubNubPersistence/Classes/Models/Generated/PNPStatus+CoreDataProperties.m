@@ -2,7 +2,7 @@
 //  PNPStatus+CoreDataProperties.m
 //  Pods
 //
-//  Created by Jordan Zucker on 9/27/16.
+//  Created by Jordan Zucker on 10/1/16.
 //
 //
 
@@ -14,9 +14,10 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"Status"];
 }
 
-@dynamic lastStatusCode;
+@dynamic creationDate;
 @dynamic currentUUID;
-@dynamic timetoken;
+@dynamic lastStatusCode;
 @dynamic subscribables;
+@dynamic timetoken;
 
 @end

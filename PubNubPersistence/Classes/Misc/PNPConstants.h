@@ -20,4 +20,10 @@ _Pragma("clang diagnostic ignored  \"-Wshadow\""); \
 __strong __typeof__(__var) __var = __var ## _weak_; \
 _Pragma("clang diagnostic pop") \
 
+typedef NS_ENUM(NSInteger, PNPMessageSourceType) {
+    PNPMessageSourceTypeUnknown = -1,
+    PNPMessageSourceTypeSubscribe = 0,
+    PNPMessageSourceTypeHistory,
+};
+
 #endif /* PNPConstants_h */

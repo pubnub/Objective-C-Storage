@@ -2,7 +2,7 @@
 //  PNPTimetoken+CoreDataProperties.m
 //  Pods
 //
-//  Created by Jordan Zucker on 9/27/16.
+//  Created by Jordan Zucker on 10/1/16.
 //
 //
 
@@ -16,7 +16,7 @@
 
 @dynamic creationDate;
 @dynamic timetoken;
-@dynamic statuses;
 @dynamic messages;
+@dynamic statuses;
 
 @end

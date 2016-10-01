@@ -101,7 +101,7 @@
 
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
     [self performBackgroundTaskAndSave:^(NSManagedObjectContext * _Nonnull context) {
-        PNPMessage *createdMessage = [PNPMessage messageWithMessage:message inContext:context];
+        PNPMessage *createdMessage = [PNPMessage subscribedMessageWithMessage:message inContext:context];
     }];
 }
 
@@ -179,7 +179,8 @@
                 id messagePayload = nil;
                 if (historyMessage[@"message"]) {
                     messagePayload = historyMessage[@"message"];
-                    PNPMessage *historyMessage = [PNPMessage messageWithFetchedChannel:fetchedChannel timetoken:messageTimetoken message:messagePayload inContext:context];
+                    PNPMessage *historyMessage = [PNPMessage historyMessageWithFetchedChannel:fetchedChannel timetoken:messageTimetoken message:messagePayload inContext:context];
+                    //PNPMessage *historyMessage = [PNPMessage messageWithFetchedChannel:fetchedChannel timetoken:messageTimetoken message:messagePayload inContext:context];
                     [savedMessages addObject:historyMessage.objectID];
                 }
             }

@@ -10,22 +10,30 @@
 #import "PNPMessage+Additions.h"
 #import "PNPTimetoken+Additions.h"
 #import "PNPSubscribable+Additions.h"
+#import "PNPMessageSource+Additions.h"
 
 @implementation PNPMessage (Additions)
 
-+ (instancetype)messageWithMessage:(PNMessageResult *)message inContext:(NSManagedObjectContext *)context {
++ (instancetype)subscribedMessageWithMessage:(PNMessageResult *)message inContext:(NSManagedObjectContext *)context {
     /*
      NSString *subscriptionMatch = message.data.subscription;
      if (subscriptionMatch) {
      PNPSubscribable *
      }
      */
-    return [self messageWithChannel:message.data.channel timetoken:message.data.timetoken message:message.data.message inContext:context];
+    return [self messageWithSource:PNPMessageSourceTypeSubscribe channel:message.data.channel timetoken:message.data.timetoken message:message.data.message inContext:context];
 }
 
-+ (instancetype)messageWithFetchedChannel:(PNPSubscribable *)channel timetoken:(NSNumber *)timetoken message:(id)message inContext:(NSManagedObjectContext *)context {
++ (instancetype)historyMessageWithFetchedChannel:(PNPSubscribable *)channel timetoken:(NSNumber *)timetoken message:(id)message inContext:(NSManagedObjectContext *)context {
+    return [self messageWithSource:PNPMessageSourceTypeHistory fetchedChannel:channel timetoken:timetoken message:message inContext:context];
+}
+
++ (instancetype)messageWithSource:(PNPMessageSourceType)source fetchedChannel:(PNPSubscribable *)channel timetoken:(NSNumber *)timetoken message:(id)message inContext:(NSManagedObjectContext *)context {
     NSParameterAssert(channel.subscribableType == PNPSubscribableTypeChannel);
     PNPMessage *createdMessage = [[PNPMessage alloc] initWithContext:context];
+    
+    PNPMessageSource *messageSource = [PNPMessageSource messageSourceWithType:source inContext:context];
+    [createdMessage addSourcesObject:messageSource];
     
     PNPTimetoken *messageTimetoken = [PNPTimetoken createOrUpdate:timetoken inContext:context];
     createdMessage.timetoken = messageTimetoken;
@@ -49,11 +57,10 @@
     return createdMessage;
 }
 
-+ (instancetype)messageWithChannel:(NSString *)channel timetoken:(NSNumber *)timetoken message:(id)message inContext:(NSManagedObjectContext *)context {
-    PNPMessage *createdMessage = [[PNPMessage alloc] initWithContext:context];
++ (instancetype)messageWithSource:(PNPMessageSourceType)source channel:(NSString *)channel timetoken:(NSNumber *)timetoken message:(id)message inContext:(NSManagedObjectContext *)context {
     
     PNPSubscribable *fetchedChannel = [PNPSubscribable createOrUpdateChannel:channel inContext:context];
-    return [self messageWithFetchedChannel:fetchedChannel timetoken:timetoken message:message inContext:context];
+    return [self messageWithSource:source fetchedChannel:fetchedChannel timetoken:timetoken message:message inContext:context];
 }
 
 - (NSString *)messageString {
