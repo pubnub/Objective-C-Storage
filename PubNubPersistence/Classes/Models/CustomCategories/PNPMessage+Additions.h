@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)messageWithSource:(PNPMessageSourceType)source channel:(NSString *)channel timetoken:(NSNumber *)timetoken message:(nullable id)message inContext:(NSManagedObjectContext *)context;
 + (instancetype)messageWithSource:(PNPMessageSourceType)source fetchedChannel:(PNPSubscribable *)channel timetoken:(NSNumber *)timetoken message:(nullable id)message inContext:(NSManagedObjectContext *)context;
 
++ (instancetype)createOrUpdateMessage:(nullable id)message withFetchedChannel:(PNPSubscribable *)channel fetchedTimetoken:(PNPTimetoken *)timetoken source:(PNPMessageSourceType)source inContext:(NSManagedObjectContext *)context;
+
 - (NSString *)messageString;
 - (NSString *)subscribablesString;
 
