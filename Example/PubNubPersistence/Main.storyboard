@@ -68,6 +68,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="History"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5F8-Qg-wbT">
+                                <frame key="frameInset" minX="52" minY="182" width="87" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Unsubscribe"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -75,6 +80,7 @@
                     <connections>
                         <outlet property="currentTimetokenLabel" destination="UFL-LG-klZ" id="lDM-jH-5n6"/>
                         <outlet property="historyButton" destination="W2A-8u-aNR" id="S6H-ck-PvL"/>
+                        <outlet property="unsubscribeButton" destination="5F8-Qg-wbT" id="aRO-fu-oLs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gtI-ga-5fi" userLabel="First Responder" sceneMemberID="firstResponder"/>

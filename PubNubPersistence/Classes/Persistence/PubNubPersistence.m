@@ -12,6 +12,7 @@
 #import "PNPMessage+Additions.h"
 #import "PNPStatus+Additions.h"
 #import "PNPSubscribable+Additions.h"
+#import "PNPTimetoken+Additions.h"
 
 @interface PubNubPersistence () <PNObjectEventListener>
 @property (nonatomic, strong, readwrite) PNPPersistenceConfiguration *configuration;
@@ -51,6 +52,26 @@
 
 - (PubNub *)client {
     return self.configuration.client;
+}
+
+- (PNPTimetoken *)newestTimetokenInContext:(NSManagedObjectContext *)context {
+    NSParameterAssert(context);
+    __block PNPTimetoken *timetoken = nil;
+    [context performBlockAndWait:^{
+        NSFetchRequest<PNPTimetoken *> *fetchRequest = [PNPTimetoken fetchRequest];
+        NSSortDescriptor *timeOrdered = [NSSortDescriptor sortDescriptorWithKey:@"timetoken" ascending:NO];
+        fetchRequest.sortDescriptors = @[
+                                         timeOrdered,
+                                         ];
+        NSError *fetchError;
+        NSArray<PNPTimetoken *> *matchedTimetokens = [fetchRequest execute:&fetchError];
+        timetoken = matchedTimetokens.firstObject;
+    }];
+    return timetoken;
+}
+
+- (nullable NSArray<PNPMessage *> *)newestMessagesInContext:(NSManagedObjectContext *)context {
+    return [self newestTimetokenInContext:context].messages.allObjects;
 }
 
 #pragma mark - Methods
@@ -95,12 +116,14 @@
 
 - (void)client:(PubNub *)client didReceiveStatus:(PNStatus *)status {
     [self performBackgroundTaskAndSave:^void(NSManagedObjectContext * _Nonnull context) {
+        NSLog(@"pnp-event: **************** status: %@ ****************", status.debugDescription);
         PNPStatus *createdStatus = [PNPStatus createOrUpdate:status inContext:context];
     }];
 }
 
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
     [self performBackgroundTaskAndSave:^(NSManagedObjectContext * _Nonnull context) {
+        NSLog(@"pnp-event: ================ message: %@ ================", message.debugDescription);
         PNPMessage *createdMessage = [PNPMessage subscribedMessageWithMessage:message inContext:context];
     }];
 }
@@ -174,7 +197,7 @@
         [self performBackgroundTaskAndSave:^(NSManagedObjectContext * _Nonnull context) {
             PNPSubscribable *fetchedChannel = [PNPSubscribable createOrUpdateChannel:channel inContext:context];
             for (NSDictionary *historyMessage in result.data.messages) {
-                NSLog(@"message: %@", historyMessage);
+                //NSLog(@"message: %@", historyMessage);
                 NSNumber *messageTimetoken = (NSNumber *)historyMessage[@"timetoken"];
                 id messagePayload = nil;
                 if (historyMessage[@"message"]) {

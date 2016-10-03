@@ -9,6 +9,8 @@
 #ifndef Persistence_h
 #define Persistence_h
 
+#import <PubNub/PubNub.h>
+
 #import "PNPConstants.h"
 #import "PNPPersistenceConfiguration.h"
 #import "PubNubPersistence.h"

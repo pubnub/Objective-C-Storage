@@ -13,6 +13,8 @@
 
 @class PubNub;
 @class PNPPersistenceConfiguration;
+@class PNPTimetoken;
+@class PNPMessage;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,7 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)saveContext;
 
-- (void)testHistory;
+- (nullable PNPTimetoken *)newestTimetokenInContext:(NSManagedObjectContext *)context;
+
+- (nullable NSArray<PNPMessage *> *)newestMessagesInContext:(NSManagedObjectContext *)context;
 
 /*
 - (void)historyForChannel:(NSString *)channel start:(nullable NSNumber *)startDate

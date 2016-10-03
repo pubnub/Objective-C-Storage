@@ -13,6 +13,7 @@
 @interface PNPStatusViewController ()
 @property (nonatomic, weak) IBOutlet UILabel *currentTimetokenLabel;
 @property (nonatomic, weak) IBOutlet UIButton *historyButton;
+@property (nonatomic, weak) IBOutlet UIButton *unsubscribeButton;
 @property (nonatomic, strong) PNPStatus *currentStatus;
 @end
 
@@ -27,6 +28,7 @@
     self.currentStatus = [PNPStatus currentStatusInContext:persistence.persistentContainer.viewContext];
     
     [self.historyButton addTarget:self action:@selector(historyButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.unsubscribeButton addTarget:self action:@selector(unsubscribeButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view setNeedsLayout];
 }
@@ -55,6 +57,11 @@
             NSLog(@"error: %@", error.localizedDescription);
         }
     }];
+}
+
+- (void)unsubscribeButtonTapped:(UIButton *)sender {
+    PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelegate.persistence.client unsubscribeFromAll];
 }
 
 #pragma mark - KVO Getters
