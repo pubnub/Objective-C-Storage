@@ -2,14 +2,14 @@
 //  PNPMessage+CoreDataClass.h
 //  Pods
 //
-//  Created by Jordan Zucker on 9/27/16.
+//  Created by Jordan Zucker on 10/4/16.
 //
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class PNPSubscribable, PNPTimetoken;
+@class PNPMessageSource, PNPPayload, PNPSubscribable, PNPTimetoken;
 
 NS_ASSUME_NONNULL_BEGIN
 

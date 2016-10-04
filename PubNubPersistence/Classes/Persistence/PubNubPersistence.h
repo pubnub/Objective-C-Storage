@@ -10,6 +10,7 @@
 #import <PubNub/PubNub.h>
 
 #import "PNPConstants.h"
+#import "PNPMessaging.h"
 
 @class PNPTimetoken;
 @class PNPMessage;
@@ -39,6 +40,9 @@ typedef void (^PNPHistoryCompletionBlock)(NSArray<NSManagedObjectID *> * _Nullab
 - (void)persistentHistoryForChannel:(NSString *)channel start:(nullable NSNumber *)startDate end:(nullable NSNumber *)endDate withCompletion:(nullable PNPHistoryCompletionBlock)block;
 
 - (void)catchUpOnChannel:(NSString *)channel withCompletion:(nullable PNPHistoryCompletionBlock)block;
+
+- (void)persistentPublish:(id)message toChannel:(NSString *)channel withMetadata:(nullable NSDictionary<NSString *,id> *)metadata completion:(nullable PNPublishCompletionBlock)block;
+- (void)persistentPublish:(id)message toChannel:(NSString *)channel completion:(nullable PNPublishCompletionBlock)block;
 
 
 - (void)performBackgroundTaskAndSave:(void (^)(NSManagedObjectContext *))block;

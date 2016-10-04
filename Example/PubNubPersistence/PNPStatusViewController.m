@@ -16,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *unsubscribeButton;
 @property (nonatomic, weak) IBOutlet UIButton *newestTimetokenButton;
 @property (nonatomic, weak) IBOutlet UIButton *newestMessageForChannelButton;
+@property (nonatomic, weak) IBOutlet UIButton *publishMessageButton;
 @property (nonatomic, strong) PNPStatus *currentStatus;
 @end
 
@@ -33,6 +34,7 @@
     [self.unsubscribeButton addTarget:self action:@selector(unsubscribeButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.newestTimetokenButton addTarget:self action:@selector(newestTimetokenButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.newestMessageForChannelButton addTarget:self action:@selector(newestMessageForChannelButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.publishMessageButton addTarget:self action:@selector(publishMessageButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view setNeedsLayout];
 }
@@ -51,7 +53,7 @@
 - (void)newestMessageForChannelButtonTapped:(UIButton *)sender {
     PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
     PubNubPersistence *client = appDelegate.client;
-    PNPMessage *newestMessage = [client newestMessageForChannel:@"a" inContext:client.viewContext];
+    PNPMessage *newestMessage = [client newestMessageForChannel:@"meta" inContext:client.viewContext];
     NSLog(@"latest message: %@", newestMessage.debugDescription);
 }
 
@@ -69,11 +71,19 @@
     NSNumber *end = @([[NSDate dateWithTimeIntervalSince1970:1000] timeIntervalSince1970]);
     
     PubNubPersistence *client = appDelegate.client;
-    [client persistentHistoryForChannel:@"a" start:start end:end withCompletion:^(NSArray<NSManagedObjectID *> * _Nullable messages, NSError * _Nullable error) {
+    [client persistentHistoryForChannel:@"meta" start:start end:end withCompletion:^(NSArray<NSManagedObjectID *> * _Nullable messages, NSError * _Nullable error) {
         NSLog(@"messages: %@", messages);
         if (error) {
             NSLog(@"error: %@", error.localizedDescription);
         }
+    }];
+}
+
+- (void)publishMessageButtonTapped:(UIButton *)sender {
+    PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
+    PubNubPersistence *client = appDelegate.client;
+    [client persistentPublish:@{@"message": @"hello"} toChannel:@"meta" completion:^(PNPublishStatus * _Nonnull status) {
+        NSLog(@"status: %@", status.debugDescription);
     }];
 }
 

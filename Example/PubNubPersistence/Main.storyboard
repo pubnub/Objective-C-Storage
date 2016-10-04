@@ -83,6 +83,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Newest message for channel"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z3G-z5-NVm">
+                                <frame key="frameInset" minX="33" minY="305" width="116" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Publish Message"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -92,6 +97,7 @@
                         <outlet property="historyButton" destination="W2A-8u-aNR" id="S6H-ck-PvL"/>
                         <outlet property="newestMessageForChannelButton" destination="3Tz-l6-L61" id="2H6-ii-u6e"/>
                         <outlet property="newestTimetokenButton" destination="DA1-CA-Yzw" id="jJj-vt-gXQ"/>
+                        <outlet property="publishMessageButton" destination="Z3G-z5-NVm" id="IGg-dn-zDe"/>
                         <outlet property="unsubscribeButton" destination="5F8-Qg-wbT" id="aRO-fu-oLs"/>
                     </connections>
                 </viewController>

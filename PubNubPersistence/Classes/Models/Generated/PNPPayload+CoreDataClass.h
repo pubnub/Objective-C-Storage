@@ -1,5 +1,5 @@
 //
-//  PNPStatus+CoreDataClass.h
+//  PNPPayload+CoreDataClass.h
 //  Pods
 //
 //  Created by Jordan Zucker on 10/4/16.
@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class PNPSubscribable, PNPTimetoken;
+@class PNPMessage;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PNPStatus : NSManagedObject
+@interface PNPPayload : NSManagedObject
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#import "PNPStatus+CoreDataProperties.h"
+#import "PNPPayload+CoreDataProperties.h"

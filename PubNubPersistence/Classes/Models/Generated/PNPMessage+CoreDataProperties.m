@@ -2,7 +2,7 @@
 //  PNPMessage+CoreDataProperties.m
 //  Pods
 //
-//  Created by Jordan Zucker on 10/1/16.
+//  Created by Jordan Zucker on 10/4/16.
 //
 //
 
@@ -15,9 +15,9 @@
 }
 
 @dynamic creationDate;
-@dynamic payload;
+@dynamic sources;
 @dynamic subscribables;
 @dynamic timetoken;
-@dynamic sources;
+@dynamic payload;
 
 @end

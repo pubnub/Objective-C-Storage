@@ -2,7 +2,7 @@
 //  PNPStatus+CoreDataProperties.h
 //  Pods
 //
-//  Created by Jordan Zucker on 10/1/16.
+//  Created by Jordan Zucker on 10/4/16.
 //
 //
 

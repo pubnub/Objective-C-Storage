@@ -293,6 +293,22 @@
     }
 }
 
+#pragma mark - Publish
+
+- (void)persistentPublish:(id)message toChannel:(NSString *)channel completion:(PNPublishCompletionBlock)block {
+    [self persistentPublish:message toChannel:channel withMetadata:nil completion:block];
+}
+
+- (void)persistentPublish:(id)message toChannel:(NSString *)channel withMetadata:(NSDictionary<NSString *,id> *)metadata completion:(PNPublishCompletionBlock)block {
+    NSMutableDictionary *finalMetadata = [@{
+                                         @"messageUUID": [NSUUID UUID].UUIDString,
+                                         } mutableCopy];
+    if (metadata) {
+        [finalMetadata addEntriesFromDictionary:metadata];
+    }
+    [self publish:message toChannel:channel withMetadata:finalMetadata.copy completion:block];
+}
+
 #pragma mark - History
 
 - (void)persistentHistoryForChannel:(NSString *)channel start:(NSNumber *)startDate end:(NSNumber *)endDate withCompletion:(PNPHistoryCompletionBlock)block {

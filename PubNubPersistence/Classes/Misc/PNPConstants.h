@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, PNPMessageSourceType) {
     PNPMessageSourceTypeUnknown = -1,
     PNPMessageSourceTypeSubscribe = 0,
     PNPMessageSourceTypeHistory,
+    PNPMessageSourceTypePush,
 };
 
 #endif /* PNPConstants_h */

@@ -1,15 +1,14 @@
 //
-//  PNPSubscribable+CoreDataClass.m
+//  PNPPayload+CoreDataClass.m
 //  Pods
 //
 //  Created by Jordan Zucker on 10/4/16.
 //
 //
 
-#import "PNPSubscribable+CoreDataClass.h"
+#import "PNPPayload+CoreDataClass.h"
 #import "PNPMessage+CoreDataClass.h"
-#import "PNPStatus+CoreDataClass.h"
-@implementation PNPSubscribable
+@implementation PNPPayload
 
 - (void)awakeFromInsert {
     [super awakeFromInsert];

@@ -13,8 +13,10 @@
 
 #import "PNPConstants.h"
 //#import "PNPPersistenceConfiguration.h"
+#import "PNPMessaging.h"
 #import "PubNubPersistence.h"
 
+#import "PNPPayload+Additions.h"
 #import "PNPMessage+Additions.h"
 #import "PNPTimetoken+Additions.h"
 #import "PNPSubscribable+Additions.h"
