@@ -340,51 +340,6 @@
     }];
 }
 
-- (void)persistentHistoryForChannelObject:(PNPSubscribable *)channel start:(NSNumber *)startDate end:(NSNumber *)endDate withCompletion:(PNPHistoryCompletionBlock)block {
-    [self historyForChannel:channel.name start:startDate end:endDate includeTimeToken:YES withCompletion:^(PNHistoryResult * _Nullable result, PNErrorStatus * _Nullable status) {
-        __block NSMutableArray<NSManagedObjectID *> *savedMessages = [NSMutableArray array];
-        if (status) {
-            return;
-        }
-        [self performBackgroundTaskAndSave:^(NSManagedObjectContext * _Nonnull context) {
-            PNPSubscribable *fetchedChannel = (PNPSubscribable *)[context objectWithID:channel.objectID];
-            for (NSDictionary *historyMessage in result.data.messages) {
-                //NSLog(@"message: %@", historyMessage);
-                NSNumber *messageTimetoken = (NSNumber *)historyMessage[@"timetoken"];
-                id messagePayload = nil;
-                if (historyMessage[@"message"]) {
-                    messagePayload = historyMessage[@"message"];
-                    PNPMessage *historyMessage = [PNPMessage historyMessageWithFetchedChannel:fetchedChannel timetoken:messageTimetoken message:messagePayload inContext:context];
-                    //PNPMessage *historyMessage = [PNPMessage messageWithFetchedChannel:fetchedChannel timetoken:messageTimetoken message:messagePayload inContext:context];
-                    [savedMessages addObject:historyMessage.objectID];
-                }
-            }
-        } withCompletion:^(NSManagedObjectContext * _Nonnull context, NSError * _Nullable error) {
-            if (block) {
-                // first check if there is a status
-                if (status) {
-                    NSError *historyError = [NSError errorWithDomain:@"PubNubPersistence" code:100 userInfo:@{
-                                                                                                              @"description": status.stringifiedCategory,
-                                                                                                              }];
-                    block(nil, error);
-                    return;
-                }
-                // then check for a save error
-                if (error) {
-                    if (savedMessages.count) {
-                        block(savedMessages.copy, error);
-                    } else {
-                        block(nil, error);
-                    }
-                    return;
-                }
-                // else just return
-                block(savedMessages.copy, nil);
-            }
-        }];
-    }];
-}
-
 - (void)catchUpOnChannel:(NSString *)channel withCompletion:(PNPHistoryCompletionBlock)block {
     [self performBackgroundTask:^(NSManagedObjectContext * _Nonnull context) {
         PNPTimetoken *newestTimetoken = [self newestMessageTimetokenForChannel:channel InContext:context];
