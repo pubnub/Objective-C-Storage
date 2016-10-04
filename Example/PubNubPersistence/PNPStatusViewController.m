@@ -14,6 +14,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *currentTimetokenLabel;
 @property (nonatomic, weak) IBOutlet UIButton *historyButton;
 @property (nonatomic, weak) IBOutlet UIButton *unsubscribeButton;
+@property (nonatomic, weak) IBOutlet UIButton *newestTimetokenButton;
+@property (nonatomic, weak) IBOutlet UIButton *newestMessageForChannelButton;
 @property (nonatomic, strong) PNPStatus *currentStatus;
 @end
 
@@ -23,12 +25,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
-    PubNubPersistence *persistence = appDelegate.persistence;
+    PubNubPersistence *client = appDelegate.client;
     
-    self.currentStatus = [PNPStatus currentStatusInContext:persistence.persistentContainer.viewContext];
+    self.currentStatus = [PNPStatus currentStatusInContext:client.viewContext];
     
     [self.historyButton addTarget:self action:@selector(historyButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.unsubscribeButton addTarget:self action:@selector(unsubscribeButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.newestTimetokenButton addTarget:self action:@selector(newestTimetokenButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.newestMessageForChannelButton addTarget:self action:@selector(newestMessageForChannelButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view setNeedsLayout];
 }
@@ -44,14 +48,28 @@
 
 #pragma mark - Actions
 
+- (void)newestMessageForChannelButtonTapped:(UIButton *)sender {
+    PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
+    PubNubPersistence *client = appDelegate.client;
+    PNPMessage *newestMessage = [client newestMessageForChannel:@"a" inContext:client.viewContext];
+    NSLog(@"latest message: %@", newestMessage.debugDescription);
+}
+
+- (void)newestTimetokenButtonTapped:(UIButton *)sender {
+    PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
+    PubNubPersistence *client = appDelegate.client;
+    PNPTimetoken *newestTimetoken = [client newestMessageTimetokenInContext:client.viewContext];
+    NSLog(@"latest timetoken: %@", newestTimetoken.debugDescription);
+}
+
 - (void)historyButtonTapped:(UIButton *)sender {
     PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
     NSNumber *start = @([[NSDate date] timeIntervalSince1970]);
     
     NSNumber *end = @([[NSDate dateWithTimeIntervalSince1970:1000] timeIntervalSince1970]);
     
-    PubNubPersistence *persistence = appDelegate.persistence;
-    [persistence historyForChannel:@"a" start:start end:end withCompletion:^(NSArray<NSManagedObjectID *> * _Nullable messages, NSError * _Nullable error) {
+    PubNubPersistence *client = appDelegate.client;
+    [client persistentHistoryForChannel:@"a" start:start end:end withCompletion:^(NSArray<NSManagedObjectID *> * _Nullable messages, NSError * _Nullable error) {
         NSLog(@"messages: %@", messages);
         if (error) {
             NSLog(@"error: %@", error.localizedDescription);
@@ -61,7 +79,7 @@
 
 - (void)unsubscribeButtonTapped:(UIButton *)sender {
     PNPAppDelegate *appDelegate = (PNPAppDelegate *)[UIApplication sharedApplication].delegate;
-    [appDelegate.persistence.client unsubscribeFromAll];
+    [appDelegate.client unsubscribeFromAll];
 }
 
 #pragma mark - KVO Getters

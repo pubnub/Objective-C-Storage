@@ -6,24 +6,21 @@
 //  Copyright (c) 2016 Jordan Zucker. All rights reserved.
 //
 
-#import <PubNub/PubNub.h>
 #import <PubNubPersistence/Persistence.h>
 #import "PNPAppDelegate.h"
 
 @interface PNPAppDelegate ()
-@property (nonatomic, strong, readwrite) PubNubPersistence *persistence;
-@property (nonatomic, strong, readwrite) PubNub *client;
+@property (nonatomic, strong, readwrite) PubNubPersistence *client;
 
 @end
 
 @implementation PNPAppDelegate
 @synthesize client = _client;
-@synthesize persistence = _persistence;
 
-- (PubNub *)client {
+- (PubNubPersistence *)client {
     if (!_client) {
         PNConfiguration *config = [PNConfiguration configurationWithPublishKey:@"demo-36" subscribeKey:@"demo-36"];
-        _client = [PubNub clientWithConfiguration:config];
+        _client = [PubNubPersistence clientWithConfiguration:config];
         _client.logger.enabled = NO;
         //_client.logger.enabled = YES;
         //[_client.logger setLogLevel:PNVerboseLogLevel];
@@ -37,8 +34,6 @@
 //    self.client = [PubNub clientWithConfiguration:config];
 //    PNPPersistenceLayerConfiguration *persistenceConfig = [PNPPersistenceLayerConfiguration persistenceLayerConfigurationWithClient:self.client];
 //    self.persistenceLayer = [PNPPersistenceLayer persistenceLayerWithConfiguration:persistenceConfig];
-    PNPPersistenceConfiguration *config = [PNPPersistenceConfiguration persistenceConfigurationWithClient:self.client];
-    self.persistence = [PubNubPersistence persistenceWithConfiguration:config];
     [self.client subscribeToChannels:@[@"a"] withPresence:YES];
     /*
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -91,6 +86,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [self.client saveContext];
 }
 
 @end

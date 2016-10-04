@@ -7,43 +7,40 @@
 //
 
 @import CoreData;
-#import <Foundation/Foundation.h>
+#import <PubNub/PubNub.h>
 
 #import "PNPConstants.h"
 
-@class PubNub;
-@class PNPPersistenceConfiguration;
 @class PNPTimetoken;
 @class PNPMessage;
+@class PNPSubscribable;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PubNubPersistence : NSObject
-
-@property (nonatomic, strong, readonly) PubNub *client;
-@property (nonatomic, strong, readonly) PNPPersistenceConfiguration *configuration;
-
-- (instancetype)initWithConfiguration:(PNPPersistenceConfiguration *)configuration;
-+ (instancetype)persistenceWithConfiguration:(PNPPersistenceConfiguration *)configuration;
+@interface PubNubPersistence : PubNub
 
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 
 - (void)saveContext;
+- (NSManagedObjectContext *)viewContext;
+- (NSManagedObjectContext *)newBackgroundContext NS_RETURNS_RETAINED;
+- (void)performBackgroundTask:(void (^)(NSManagedObjectContext *))block;
 
 - (nullable PNPTimetoken *)newestTimetokenInContext:(NSManagedObjectContext *)context;
+- (nullable PNPTimetoken *)newestMessageTimetokenInContext:(NSManagedObjectContext *)context;
 
 - (nullable NSArray<PNPMessage *> *)newestMessagesInContext:(NSManagedObjectContext *)context;
 
-/*
-- (void)historyForChannel:(NSString *)channel start:(nullable NSNumber *)startDate
-                      end:(nullable NSNumber *)endDate includeTimeToken:(BOOL)shouldIncludeTimeToken
-           withCompletion:(PNHistoryCompletionBlock)block
- */
-//typedef void(^PNHistoryCompletionBlock)(PNHistoryResult * _Nullable result, PNErrorStatus * _Nullable status);
-typedef void (^PNPHistoryCompletionBlock)(NSArray<NSManagedObjectID *> * _Nullable messages, NSError * _Nullable error);
-- (void)historyForChannel:(NSString *)channel start:(nullable NSNumber *)startDate end:(nullable NSNumber *)endDate withCompletion:(nullable PNPHistoryCompletionBlock)block;
+- (nullable PNPTimetoken *)newestMessageTimetokenForChannel:(NSString *)channel inContext:(NSManagedObjectContext *)context;
+- (nullable PNPMessage *)newestMessageForChannel:(NSString *)channel inContext:(NSManagedObjectContext *)context;
 
-// if block return is YES then will save, if NO then will not save
+typedef void (^PNPHistoryCompletionBlock)(NSArray<NSManagedObjectID *> * _Nullable messages, NSError * _Nullable error);
+
+- (void)persistentHistoryForChannel:(NSString *)channel start:(nullable NSNumber *)startDate end:(nullable NSNumber *)endDate withCompletion:(nullable PNPHistoryCompletionBlock)block;
+
+- (void)catchUpOnChannel:(NSString *)channel withCompletion:(nullable PNPHistoryCompletionBlock)block;
+
+
 - (void)performBackgroundTaskAndSave:(void (^)(NSManagedObjectContext *))block;
 - (void)performBackgroundTaskAndSave:(void (^)(NSManagedObjectContext *))block withCompletion:(nullable void (^)(NSManagedObjectContext *, NSError * _Nullable))completionBlock;
 

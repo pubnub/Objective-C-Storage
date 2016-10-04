@@ -12,7 +12,7 @@
 #import <PubNub/PubNub.h>
 
 #import "PNPConstants.h"
-#import "PNPPersistenceConfiguration.h"
+//#import "PNPPersistenceConfiguration.h"
 #import "PubNubPersistence.h"
 
 #import "PNPMessage+Additions.h"

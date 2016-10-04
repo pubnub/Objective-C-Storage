@@ -73,6 +73,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Unsubscribe"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DA1-CA-Yzw">
+                                <frame key="frameInset" minX="33" minY="220" width="124" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Newest timetoken"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Tz-l6-L61">
+                                <frame key="frameInset" minX="16" minY="267" width="198" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Newest message for channel"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -80,6 +90,8 @@
                     <connections>
                         <outlet property="currentTimetokenLabel" destination="UFL-LG-klZ" id="lDM-jH-5n6"/>
                         <outlet property="historyButton" destination="W2A-8u-aNR" id="S6H-ck-PvL"/>
+                        <outlet property="newestMessageForChannelButton" destination="3Tz-l6-L61" id="2H6-ii-u6e"/>
+                        <outlet property="newestTimetokenButton" destination="DA1-CA-Yzw" id="jJj-vt-gXQ"/>
                         <outlet property="unsubscribeButton" destination="5F8-Qg-wbT" id="aRO-fu-oLs"/>
                     </connections>
                 </viewController>
